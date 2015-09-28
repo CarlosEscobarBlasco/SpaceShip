@@ -19,11 +19,17 @@ public class ShipMovement : MonoBehaviour {
 
     public void lateralMovement(bool right)
     {
-        transform.Translate(right ? lateralSpeed * Time.deltaTime : (-1)* lateralSpeed * Time.deltaTime, 0, 0);
+        if(insideBounds(right))transform.Translate(right ? lateralSpeed * Time.deltaTime : (-1)* lateralSpeed * Time.deltaTime, 0, 0);
     }
 
     private void increaseSpeed()
     {
         if(forwardSpeed < 3) forwardSpeed += 0.1f;
+    }
+
+    private bool insideBounds(bool right)
+    {
+        if (right ? transform.position.x < 2.4f : transform.position.x > -2.4f ) return true;
+        return false;
     }
 }
