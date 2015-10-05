@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class FollowShip : MonoBehaviour {
+
     private GameObject objectToFollow;
 	// Use this for initialization
 	void Start () {
