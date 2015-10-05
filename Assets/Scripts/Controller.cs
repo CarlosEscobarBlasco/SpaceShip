@@ -17,8 +17,6 @@ public class Controller : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         ships = GameObject.FindGameObjectsWithTag("CPU");
         setPlayerToCamera();
-        //setLastPlayerToDestroyer();
-        //setFirstPlayerToSpawner();
     }
 	
 	// Update is called once per frame

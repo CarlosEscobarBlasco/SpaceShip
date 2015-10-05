@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(FollowShip))]
 public class DestroyerController : MonoBehaviour {
     
 	// Use this for initialization
