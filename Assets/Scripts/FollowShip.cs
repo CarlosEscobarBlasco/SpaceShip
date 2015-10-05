@@ -10,7 +10,7 @@ public class FollowShip : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = new Vector3(transform.position.x, objectToFollow.transform.position.y + 3 , transform.position.z);
+        transform.position = new Vector3(transform.position.x, objectToFollow.transform.position.y + 4 , transform.position.z);
 	}
 
     public void setObjectToFollow(GameObject objectToFollow)
