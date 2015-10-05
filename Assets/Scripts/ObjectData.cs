@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectData : MonoBehaviour{
+public class ObjectData : MonoBehaviour {
     private GameObject spawnObject;
     public float timeToSpawn;
     public float spawnTimer;

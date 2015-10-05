@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(FollowShip))]
 public class SpawnerController : MonoBehaviour {
     public GameObject[] objectsToSpawn;
     private GameObject objectToSpawn;
@@ -9,7 +10,6 @@ public class SpawnerController : MonoBehaviour {
         foreach(GameObject objectToSpawn in objectsToSpawn)
         {
             ObjectData data = objectToSpawn.GetComponent<ObjectData>();
-            //InvokeRepeating("spawnObject",data.getTimeToSpawn(), data.getSpawnTimer());
             StartCoroutine(spawnController(objectToSpawn, data.getSpawnTimer(), data.getTimeToSpawn()));
         }
 	}
@@ -18,7 +18,6 @@ public class SpawnerController : MonoBehaviour {
 	void Update () {
 
 	}
-
 
     IEnumerator spawnController(GameObject objectToSpawn, float spawnTimer, float timeToSpawn)
     {
