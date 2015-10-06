@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Controller : MonoBehaviour {
 
@@ -7,7 +9,7 @@ public class Controller : MonoBehaviour {
     public GameObject destroyer;
     public GameObject spawner;
 
-    private GameObject[] ships;
+    private List<GameObject> ships;
     private GameObject player;
     private GameObject first;
     private GameObject last;
@@ -15,7 +17,15 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        ships = GameObject.FindGameObjectsWithTag("CPU");
+        try
+        {
+            ships = new List<GameObject>(GameObject.FindGameObjectsWithTag("CPU"));
+        }
+        catch (Exception e)
+        {
+            ships = new List<GameObject>();
+        }
+        ships.Add(player);
         setPlayerToCamera();
     }
 	
@@ -39,13 +49,13 @@ public class Controller : MonoBehaviour {
 
     private void setFirstShipToSpawner(GameObject firstShip)
     {
-        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 3);
+        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 8);
     }
 
     private GameObject trackFirstShip()
     {
         int firstShipPos = 0;
-        for (int i = 0; i < ships.Length; i++)
+        for (int i = 0; i < ships.Count; i++)
         {
             if (ships[i].transform.position.y > ships[firstShipPos].transform.position.y) firstShipPos = i;
         }
@@ -55,7 +65,7 @@ public class Controller : MonoBehaviour {
     private GameObject trackLastShip()
     {
         int lastShipPos = 0;
-        for (int i = 0; i < ships.Length; i++)
+        for (int i = 0; i < ships.Count; i++)
         {
             if (ships[i].transform.position.y < ships[lastShipPos].transform.position.y) lastShipPos = i;
         }

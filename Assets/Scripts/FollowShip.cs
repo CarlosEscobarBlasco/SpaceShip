@@ -8,6 +8,7 @@ public class FollowShip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        objectToFollow = gameObject;
         distance = 3;
 	}
 	
