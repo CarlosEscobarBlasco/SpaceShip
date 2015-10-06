@@ -25,7 +25,7 @@ public class SpawnerController : MonoBehaviour {
         while (true)
         {
             spawn(objectToSpawn);
-            yield return new WaitForSeconds(spawnTimer);
+            yield return new WaitForSeconds(Random.Range(spawnTimer/3,spawnTimer));
         }
     }
 
