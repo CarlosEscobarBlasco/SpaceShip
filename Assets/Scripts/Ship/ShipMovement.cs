@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class ShipMovement : MonoBehaviour {
     public float forwardSpeed;
     public float lateralSpeed;
@@ -27,9 +28,23 @@ public class ShipMovement : MonoBehaviour {
         if(forwardSpeed < 3) forwardSpeed += 0.1f;
     }
 
+    private void decreaseSpeed(float amount)
+    {
+        if (forwardSpeed > 0) forwardSpeed -= amount;
+        if (forwardSpeed < 0) forwardSpeed = 0;
+    }
+
     private bool insideBounds(bool right)
     {
         if (right ? transform.position.x < 2.4f : transform.position.x > -2.4f ) return true;
         return false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Obstacle")
+        {
+
+        }
     }
 }

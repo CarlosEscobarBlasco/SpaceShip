@@ -44,12 +44,12 @@ public class Controller : MonoBehaviour {
 
     private void setLastShipToDestroyer(GameObject lastShip)
     {
-        destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -3);
+        destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -4);
     }
 
     private void setFirstShipToSpawner(GameObject firstShip)
     {
-        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 8);
+        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 10);
     }
 
     private GameObject trackFirstShip()

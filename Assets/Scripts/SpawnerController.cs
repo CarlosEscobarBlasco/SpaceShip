@@ -5,6 +5,7 @@ using System.Collections;
 public class SpawnerController : MonoBehaviour {
     public GameObject[] objectsToSpawn;
     private GameObject objectToSpawn;
+
 	// Use this for initialization
 	void Start () {
         foreach(GameObject objectToSpawn in objectsToSpawn)
@@ -31,12 +32,12 @@ public class SpawnerController : MonoBehaviour {
 
     void spawn(GameObject objectToSpawn)
     {
-        Instantiate(objectToSpawn, randomPosition(), objectToSpawn.transform.rotation);
+        Instantiate(objectToSpawn, randomPosition(objectToSpawn), objectToSpawn.transform.rotation);
     }
 
-    Vector3 randomPosition()
+    Vector3 randomPosition(GameObject objectToSpawn)
     {
-        return new Vector3(Random.Range(-2.4f, 2.4f), gameObject.transform.position.y, 0);
+        return new Vector3(Random.Range(-2.4f, 2.4f), gameObject.transform.position.y, objectToSpawn.transform.position.z);
     }
 
 }
