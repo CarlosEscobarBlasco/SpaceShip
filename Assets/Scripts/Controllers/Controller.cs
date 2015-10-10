@@ -11,8 +11,6 @@ public class Controller : MonoBehaviour {
 
     private List<GameObject> ships;
     private GameObject player;
-    private GameObject first;
-    private GameObject last;
 
 	// Use this for initialization
 	void Start () {
@@ -31,10 +29,8 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        first = trackFirstShip();
-        last = trackLastShip();
-        if (first != spawner.GetComponent<FollowShip>().getObjectToFollow()) setFirstShipToSpawner(first);
-        if (last != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(last);
+        sortArrayShips();
+        if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count-1]);
 	}
 
     private void setPlayerToCamera()
@@ -47,28 +43,26 @@ public class Controller : MonoBehaviour {
         destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -4);
     }
 
-    private void setFirstShipToSpawner(GameObject firstShip)
+    private void sortArrayShips()
     {
-        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 10);
-    }
+        GameObject auxShip;
 
-    private GameObject trackFirstShip()
-    {
-        int firstShipPos = 0;
         for (int i = 0; i < ships.Count; i++)
         {
-            if (ships[i].transform.position.y > ships[firstShipPos].transform.position.y) firstShipPos = i;
+            for (int j = 0; j < ships.Count - 1; j++)
+            {
+                if (GetShipY(j) < GetShipY(j+1))
+                {
+                    auxShip = ships[j];
+                    ships[j] = ships[j + 1];
+                    ships[j + 1] = auxShip;
+                }
+            }
         }
-        return ships[firstShipPos];
     }
 
-    private GameObject trackLastShip()
+    private float GetShipY(int j)
     {
-        int lastShipPos = 0;
-        for (int i = 0; i < ships.Count; i++)
-        {
-            if (ships[i].transform.position.y < ships[lastShipPos].transform.position.y) lastShipPos = i;
-        }
-        return ships[lastShipPos];
+        return ships[j].gameObject.transform.position.y;
     }
 }

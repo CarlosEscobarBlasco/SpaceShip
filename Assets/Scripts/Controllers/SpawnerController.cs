@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(FollowShip))]
 public class SpawnerController : MonoBehaviour {
     public GameObject[] objectsToSpawn;
     private GameObject objectToSpawn;
@@ -10,23 +9,23 @@ public class SpawnerController : MonoBehaviour {
 	void Start () {
         foreach(GameObject objectToSpawn in objectsToSpawn)
         {
-            ObjectData data = objectToSpawn.GetComponent<ObjectData>();
+            SpawnData data = objectToSpawn.GetComponent<SpawnData>();
             StartCoroutine(spawnController(objectToSpawn, data.getSpawnTimer(), data.getTimeToSpawn()));
         }
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-	}
+	void FixedUpdate () {
+        transform.Translate(0, 20 * Time.deltaTime, 0);
+    }
 
     IEnumerator spawnController(GameObject objectToSpawn, float spawnTimer, float timeToSpawn)
     {
         yield return new WaitForSeconds(timeToSpawn);
         while (true)
         {
+            yield return new WaitForSeconds(Random.Range(spawnTimer / 3, spawnTimer));
             spawn(objectToSpawn);
-            yield return new WaitForSeconds(Random.Range(spawnTimer/3,spawnTimer));
         }
     }
 
