@@ -21,13 +21,9 @@ public class ShipMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Debug.Log(transform.rotation);
-        transform.position = new Vector3(transform.position.x, transform.position.y + forwardSpeed, transform.position.z);
-        //transform.Translate(0, forwardSpeed*Time.deltaTime, 0);
+        transform.Translate(0, forwardSpeed*Time.deltaTime, 0, Space.World);
         increaseSpeed();
-        //Debug.Log(forwardSpeed);
 	}
-
 
     public void lateralMovement(bool right)
     {
@@ -36,14 +32,16 @@ public class ShipMovement : MonoBehaviour {
 
     private float moveLeft()
     {
-        transform.position = new Vector3(transform.position.x - lateralSpeed, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(transform.position.x - lateralSpeed, transform.position.y, transform.position.z);
+        transform.Translate(-lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateLeft();
         return (-1) * lateralSpeed * Time.deltaTime;
     }
 
     private float moveRight()
     {
-        transform.position = new Vector3(transform.position.x + lateralSpeed, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(transform.position.x + lateralSpeed, transform.position.y, transform.position.z);
+        transform.Translate(lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateRight();
         return lateralSpeed * Time.deltaTime;
     }
