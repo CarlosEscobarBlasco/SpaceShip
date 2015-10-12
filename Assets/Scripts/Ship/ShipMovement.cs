@@ -65,13 +65,8 @@ public class ShipMovement : MonoBehaviour {
 
     private void decreaseSpeed(float amount)
     {
-        if (forwardSpeed > 0) forwardSpeed -= amount;
+        if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*amount)/100;
         if (forwardSpeed < 0) forwardSpeed = 0;
-        /**
-        * Decrease Speed by percentage
-        */
-        //if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*amount)/100;
-        //if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
     private bool insideBounds(bool right)
@@ -85,7 +80,7 @@ public class ShipMovement : MonoBehaviour {
         if (collider.tag == "Obstacle")
         {
             Destroy(collider.gameObject);
-            decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmount()));
+            decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
         }
     }
 
