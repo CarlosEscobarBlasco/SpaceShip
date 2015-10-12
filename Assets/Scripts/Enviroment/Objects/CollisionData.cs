@@ -23,7 +23,7 @@ public class CollisionData : MonoBehaviour {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    public float getSlowAmount()
+    public float getSlowAmountPercentage()
     {
         return slowAmount;
     }
