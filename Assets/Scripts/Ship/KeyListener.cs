@@ -12,6 +12,6 @@ public class KeyListener : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.RightArrow)) shipMovement.lateralMovement(true);
         else if (Input.GetKey(KeyCode.LeftArrow)) shipMovement.lateralMovement(false);
-        else shipMovement.noInput(false);
+        else shipMovement.noInput();
     }
 }

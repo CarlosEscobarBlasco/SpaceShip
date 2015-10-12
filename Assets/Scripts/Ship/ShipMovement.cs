@@ -31,7 +31,10 @@ public class ShipMovement : MonoBehaviour {
 
     public void lateralMovement(bool right)
     {
-        if (insideBounds(right)) transform.Translate(right ? moveRight() : moveLeft(), 0, 0);
+        if (insideBounds(right))
+        {
+            transform.Translate(right ? moveRight() : moveLeft(), 0, 0);
+        } else noInput();
     }
 
     private float moveLeft()
@@ -84,7 +87,7 @@ public class ShipMovement : MonoBehaviour {
         }
     }
 
-    public void noInput(bool b)
+    public void noInput()
     {
         transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
     }
