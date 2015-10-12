@@ -21,15 +21,42 @@ public class ShipMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.Translate(0, forwardSpeed*Time.deltaTime, 0);
+        transform.Translate(0, forwardSpeed*Time.deltaTime, 0, Space.World);
         increaseSpeed();
-        Debug.Log(forwardSpeed);
 	}
-
 
     public void lateralMovement(bool right)
     {
-        if(insideBounds(right))transform.Translate(right ? lateralSpeed * Time.deltaTime : (-1)* lateralSpeed * Time.deltaTime, 0, 0);
+        if (insideBounds(right))
+        {
+            transform.Translate(right ? moveRight() : moveLeft(), 0, 0, Space.World);
+        } else noInput();
+    }
+
+    private float moveLeft()
+    {
+        //transform.position = new Vector3(transform.position.x - lateralSpeed, transform.position.y, transform.position.z);
+        transform.Translate(-lateralSpeed * Time.deltaTime, 0, 0, Space.World);
+        rotateLeft();
+        return (-1) * lateralSpeed * Time.deltaTime;
+    }
+
+    private float moveRight()
+    {
+        //transform.position = new Vector3(transform.position.x + lateralSpeed, transform.position.y, transform.position.z);
+        transform.Translate(lateralSpeed * Time.deltaTime, 0, 0, Space.World);
+        rotateRight();
+        return lateralSpeed * Time.deltaTime;
+    }
+
+    private void rotateLeft()
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, 0.2f, 1.0f);
+    }
+
+    private void rotateRight()
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, -0.2f, 1.0f);
     }
 
     private void increaseSpeed()
@@ -39,13 +66,8 @@ public class ShipMovement : MonoBehaviour {
 
     private void decreaseSpeed(float amount)
     {
-        if (forwardSpeed > 0) forwardSpeed -= amount;
+        if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*amount)/100;
         if (forwardSpeed < 0) forwardSpeed = 0;
-        /**
-        * Decrease Speed by percentage
-        */
-        //if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*amount)/100;
-        //if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
     private bool insideBounds(bool right)
@@ -59,7 +81,12 @@ public class ShipMovement : MonoBehaviour {
         if (collider.tag == "Obstacle")
         {
             Destroy(collider.gameObject);
-            decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmount()));
+            decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
         }
+    }
+
+    public void noInput()
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
     }
 }

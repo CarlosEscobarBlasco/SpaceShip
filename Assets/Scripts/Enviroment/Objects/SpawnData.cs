@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-
 public class SpawnData : MonoBehaviour {
-    private GameObject spawnObject;
+
     public float timeToSpawn;
     public float spawnTimer;
    
 
     void Start()
     {
-        spawnObject = gameObject;
+
     }
 
     void Update()
