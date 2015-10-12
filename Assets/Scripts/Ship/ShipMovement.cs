@@ -29,7 +29,7 @@ public class ShipMovement : MonoBehaviour {
     {
         if (insideBounds(right))
         {
-            transform.Translate(right ? moveRight() : moveLeft(), 0, 0);
+            transform.Translate(right ? moveRight() : moveLeft(), 0, 0, Space.World);
         } else noInput();
     }
 
