@@ -11,6 +11,7 @@ public class KeyListener : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.RightArrow)) shipMovement.lateralMovement(true);
-        if (Input.GetKey(KeyCode.LeftArrow)) shipMovement.lateralMovement(false);
+        else if (Input.GetKey(KeyCode.LeftArrow)) shipMovement.lateralMovement(false);
+        else shipMovement.noInput(false);
     }
 }

@@ -21,15 +21,41 @@ public class ShipMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.Translate(0, forwardSpeed*Time.deltaTime, 0);
+        Debug.Log(transform.rotation);
+        transform.position = new Vector3(transform.position.x, transform.position.y + forwardSpeed, transform.position.z);
+        //transform.Translate(0, forwardSpeed*Time.deltaTime, 0);
         increaseSpeed();
-        Debug.Log(forwardSpeed);
+        //Debug.Log(forwardSpeed);
 	}
 
 
     public void lateralMovement(bool right)
     {
-        if(insideBounds(right))transform.Translate(right ? lateralSpeed * Time.deltaTime : (-1)* lateralSpeed * Time.deltaTime, 0, 0);
+        if (insideBounds(right)) transform.Translate(right ? moveRight() : moveLeft(), 0, 0);
+    }
+
+    private float moveLeft()
+    {
+        transform.position = new Vector3(transform.position.x - lateralSpeed, transform.position.y, transform.position.z);
+        rotateLeft();
+        return (-1) * lateralSpeed * Time.deltaTime;
+    }
+
+    private float moveRight()
+    {
+        transform.position = new Vector3(transform.position.x + lateralSpeed, transform.position.y, transform.position.z);
+        rotateRight();
+        return lateralSpeed * Time.deltaTime;
+    }
+
+    private void rotateLeft()
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, 0.2f, 1.0f);
+    }
+
+    private void rotateRight()
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, -0.2f, 1.0f);
     }
 
     private void increaseSpeed()
@@ -61,5 +87,10 @@ public class ShipMovement : MonoBehaviour {
             Destroy(collider.gameObject);
             decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmount()));
         }
+    }
+
+    public void noInput(bool b)
+    {
+        transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
     }
 }

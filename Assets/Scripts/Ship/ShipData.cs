@@ -20,21 +20,21 @@ public class ShipData : MonoBehaviour
 
     public float getForwardSpeed()
     {
-        return forwardSpeed;
+        return forwardSpeed*0.1f;
     }
 
     public float getLateralSpeeed()
     {
-        return lateralSpeed;
+        return lateralSpeed*0.1f;
     }
 
     public float getAcceleration()
     {
-        return acceleration;
+        return acceleration*0.0003f;
     }
 
     public float getMaxSpeed()
     {
-        return maxSpeed;
+        return maxSpeed*0.33f;
     }
 }
