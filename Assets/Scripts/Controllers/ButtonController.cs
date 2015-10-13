@@ -6,16 +6,15 @@ public class ButtonController : MonoBehaviour {
 
     private static String input;
     private bool pressed;
+
     // Use this for initialization
     void Start()
     {
         pressed = false;
-
     }
 
     // Update is called once per frame
     void Update () {
-	
 	}
 
     void OnMouseOver()

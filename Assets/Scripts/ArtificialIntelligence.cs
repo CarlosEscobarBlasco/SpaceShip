@@ -23,18 +23,18 @@ public class ArtificialIntelligence : MonoBehaviour {
         else if (hitLeft.collider != null && hitLeft.collider.tag == "Obstacle")
         {
             //Debug.Log(hitLeft.collider.name + " en la izq");
-            movement.lateralMovement(true);
+            movement.checkSideToMove(true);
         }else if (hitRight.collider != null && hitRight.collider.tag == "Obstacle")
         {
             //Debug.Log(hitLeft.collider.name + " en la der");
-            movement.lateralMovement(false);
+            movement.checkSideToMove(false);
         }
 
 
         else if (hitCenter.collider != null && hitCenter.collider.tag == "Obstacle")
         {
             //Debug.Log(hitLeft.collider.name + " en el centro");
-            movement.lateralMovement(rightMovement);
+            movement.checkSideToMove(rightMovement);
         }
         else
         {
