@@ -89,4 +89,14 @@ public class ShipMovement : MonoBehaviour {
     {
         transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
     }
+
+    public float getForwardSpeed()
+    {
+        return forwardSpeed;
+    }
+
+    public float getMaxSpeed()
+    {
+        return maxSpeed;
+    }
 }

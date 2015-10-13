@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +9,9 @@ public class Controller : MonoBehaviour {
     public Camera mainCamera;
     public GameObject destroyer;
     public GameObject spawner;
+    public Slider slider;
+    public Text remainingDistance;
+    public GameObject finish;
 
     private List<GameObject> ships;
     private GameObject player;
@@ -25,6 +29,9 @@ public class Controller : MonoBehaviour {
         }
         ships.Add(player);
         setPlayerToCamera();
+        setPlayerToSlider();
+        setFinishToRemainingDistance();
+        setPlayertToRemainingDistance();
     }
 	
 	// Update is called once per frame
@@ -64,5 +71,20 @@ public class Controller : MonoBehaviour {
     private float GetShipY(int j)
     {
         return ships[j].gameObject.transform.position.y;
+    }
+
+    private void setPlayerToSlider()
+    {
+        slider.GetComponent<SliderController>().setPlayer(player);
+    }
+
+    private void setFinishToRemainingDistance()
+    {
+        remainingDistance.GetComponent<RemainingDistanceController>().setDistance(finish.transform.position.y);
+    }
+
+    private void setPlayertToRemainingDistance()
+    {
+        remainingDistance.GetComponent<RemainingDistanceController>().setPlayer(player);
     }
 }
