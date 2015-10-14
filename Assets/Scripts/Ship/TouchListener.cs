@@ -4,6 +4,7 @@ using System.Collections;
 public class TouchListener : MonoBehaviour
 {
     private ShipMovement movement;
+    private bool lastMove;
 
     // Use this for initialization
     void Start ()
@@ -13,8 +14,12 @@ public class TouchListener : MonoBehaviour
 
     // Update is called once per frame
 	void Update () {
-	    if (ButtonController.getInput() == "Right") movement.checkSideToMove(true);
-	    else if (ButtonController.getInput() == "Left") movement.checkSideToMove(false);
-	    else movement.noInput();
-	}
+	    if (Input.touchCount == 1)
+	    {
+	        if (Input.GetTouch(0).position.x < 180)lastMove = false;
+	        if (Input.GetTouch(0).position.x >= 180)lastMove = true;
+            movement.checkSideToMove(lastMove);
+        }else if (Input.touchCount > 1)movement.checkSideToMove(!lastMove);
+        else movement.noInput();
+    }
 }

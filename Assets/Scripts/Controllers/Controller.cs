@@ -25,7 +25,7 @@ public class Controller : MonoBehaviour {
         {
             ships = new List<GameObject>(GameObject.FindGameObjectsWithTag("CPU"));
         }
-        catch (Exception e)
+        catch (Exception)
         {
             ships = new List<GameObject>();
         }
