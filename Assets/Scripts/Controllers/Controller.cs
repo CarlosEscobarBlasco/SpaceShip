@@ -18,8 +18,8 @@ public class Controller : MonoBehaviour {
 
     private bool changePosition;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
         try
         {
@@ -30,6 +30,11 @@ public class Controller : MonoBehaviour {
             ships = new List<GameObject>();
         }
         ships.Add(player);
+        
+    }
+
+	// Use this for initialization
+	void Start () {
         setObjects();
     }
 
@@ -43,7 +48,7 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (sortArrayShips()) setShipsToUIList();
+        sortArrayShips();
         if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count-1]);
 	}
 
@@ -98,8 +103,8 @@ public class Controller : MonoBehaviour {
         remainingDistance.GetComponent<RemainingDistanceController>().setPlayer(player);
     }
 
-    private void setShipsToUIList()
+    public List<GameObject> getShipsToUIList()
     {
-        
+        return ships;
     }
 }
