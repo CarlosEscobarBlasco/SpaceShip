@@ -3,6 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(ShipData))]
 [RequireComponent(typeof(BoxCollider2D))]
+//mirar si se puede hacer si tiene tag X require Y para cpu y player
 public class ShipMovement : MonoBehaviour {
 
     private float forwardSpeed;
@@ -21,21 +22,28 @@ public class ShipMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.Translate(0, forwardSpeed*Time.deltaTime, 0, Space.World);
+        goForward();
         increaseSpeed();
 	}
 
-    public void lateralMovement(bool right)
+    private void goForward()
     {
-        if (insideBounds(right))
-        {
-            transform.Translate(right ? moveRight() : moveLeft(), 0, 0, Space.World);
-        } else noInput();
+        transform.Translate(0, forwardSpeed * Time.deltaTime, 0, Space.World);
+    }
+
+    public void checkSideToMove(bool right)
+    {
+        if (insideBounds(right)) lateralMovement(right);
+        else noInput();
+    }
+
+    private void lateralMovement(bool right)
+    {
+        transform.Translate(right ? moveRight() : moveLeft(), 0, 0, Space.World);
     }
 
     private float moveLeft()
     {
-        //transform.position = new Vector3(transform.position.x - lateralSpeed, transform.position.y, transform.position.z);
         transform.Translate(-lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateLeft();
         return (-1) * lateralSpeed * Time.deltaTime;
@@ -43,7 +51,6 @@ public class ShipMovement : MonoBehaviour {
 
     private float moveRight()
     {
-        //transform.position = new Vector3(transform.position.x + lateralSpeed, transform.position.y, transform.position.z);
         transform.Translate(lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateRight();
         return lateralSpeed * Time.deltaTime;
@@ -81,6 +88,7 @@ public class ShipMovement : MonoBehaviour {
         if (collider.tag == "Obstacle")
         {
             Destroy(collider.gameObject);
+            //animacion roto
             decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
         }
     }

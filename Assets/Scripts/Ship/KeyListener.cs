@@ -10,8 +10,18 @@ public class KeyListener : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) shipMovement.lateralMovement(true);
-        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) shipMovement.lateralMovement(false);
+        if (right()) shipMovement.checkSideToMove(true);
+        else if (left()) shipMovement.checkSideToMove(false);
         else shipMovement.noInput();
+    }
+
+    private static bool left()
+    {
+        return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+    }
+
+    private static bool right()
+    {
+        return Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
     }
 }

@@ -6,15 +6,12 @@ public class SpawnData : MonoBehaviour {
     public float timeToSpawn;
     public float spawnTimer;
    
-
     void Start()
     {
-
     }
 
     void Update()
     {
-
     }
 
     public float getTimeToSpawn()

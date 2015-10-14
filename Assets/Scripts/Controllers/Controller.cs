@@ -16,8 +16,10 @@ public class Controller : MonoBehaviour {
     private List<GameObject> ships;
     private GameObject player;
 
-	// Use this for initialization
-	void Start () {
+    private bool changePosition;
+
+    void Awake()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
         try
         {
@@ -28,6 +30,16 @@ public class Controller : MonoBehaviour {
             ships = new List<GameObject>();
         }
         ships.Add(player);
+        
+    }
+
+	// Use this for initialization
+	void Start () {
+        setObjects();
+    }
+
+    private void setObjects()
+    {
         setPlayerToCamera();
         setPlayerToSlider();
         setFinishToRemainingDistance();
@@ -50,8 +62,9 @@ public class Controller : MonoBehaviour {
         destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -4);
     }
 
-    private void sortArrayShips()
+    private bool sortArrayShips()
     {
+        changePosition = false;
         GameObject auxShip;
 
         for (int i = 0; i < ships.Count; i++)
@@ -63,9 +76,11 @@ public class Controller : MonoBehaviour {
                     auxShip = ships[j];
                     ships[j] = ships[j + 1];
                     ships[j + 1] = auxShip;
+                    changePosition = true;
                 }
             }
         }
+        return changePosition;
     }
 
     private float GetShipY(int j)
@@ -86,5 +101,10 @@ public class Controller : MonoBehaviour {
     private void setPlayertToRemainingDistance()
     {
         remainingDistance.GetComponent<RemainingDistanceController>().setPlayer(player);
+    }
+
+    public List<GameObject> getShipsToUIList()
+    {
+        return ships;
     }
 }
