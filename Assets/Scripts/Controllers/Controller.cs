@@ -107,4 +107,13 @@ public class Controller : MonoBehaviour {
     {
         return ships;
     }
+
+    public int positionOf(GameObject ship)
+    {
+        for (int i = 0; i < ships.Count; i++)
+        {
+            if (ships[i] == ship) return i+1;
+        }
+        return -1;
+    }
 }

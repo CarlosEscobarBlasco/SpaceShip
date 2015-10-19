@@ -23,7 +23,7 @@ public class ShipMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         goForward();
-        increaseSpeed();
+        ChangeSpeed();
 	}
 
     private void goForward()
@@ -66,9 +66,12 @@ public class ShipMovement : MonoBehaviour {
         transform.rotation = new Quaternion(0.0f, 0.0f, -0.2f, 1.0f);
     }
 
-    private void increaseSpeed()
+    private void ChangeSpeed()
     {
-        if(forwardSpeed < maxSpeed) forwardSpeed += acceleration;
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0)
+        {
+            forwardSpeed += acceleration;
+        }
     }
 
     private void decreaseSpeed(float amount)
@@ -106,5 +109,24 @@ public class ShipMovement : MonoBehaviour {
     public float getMaxSpeed()
     {
         return maxSpeed;
+    }
+
+    public void stopShip()
+    {
+        acceleration *= -20;
+        Invoke("disableScript", 1);
+    }
+
+    private void disableScript()
+    {
+        gameObject.GetComponent<ShipMovement>().enabled = false;
+        if (gameObject.tag == "Player")
+        {
+            gameObject.GetComponent<KeyListener>().enabled = false;
+            gameObject.GetComponent<TouchListener>().enabled = false;
+        }
+        else gameObject.GetComponent<ArtificialIntelligence>().enabled = false;
+
+
     }
 }
