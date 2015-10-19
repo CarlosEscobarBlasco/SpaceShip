@@ -18,8 +18,8 @@ public class TouchListener : MonoBehaviour
 	    {
 	        if (Input.GetTouch(0).position.x < 180)lastMove = false;
 	        if (Input.GetTouch(0).position.x >= 180)lastMove = true;
-            movement.checkSideToMove(lastMove);
-        }else if (Input.touchCount > 1)movement.checkSideToMove(!lastMove);
+            movement.move(lastMove);
+        }else if (Input.touchCount > 1)movement.move(!lastMove);
         else movement.noInput();
     }
 }

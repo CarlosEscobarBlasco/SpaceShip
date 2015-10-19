@@ -29,7 +29,6 @@ public class FinishController : MonoBehaviour
     {
         if (collider.tag == "CPU" || collider.tag == "Player")
         {
-            Debug.Log(collider.gameObject.name);
             collider.gameObject.GetComponent<ShipMovement>().stopShip();
             if(collider.tag=="Player") showPosition(collider.gameObject);
         }else if (collider.tag == "Spawner")

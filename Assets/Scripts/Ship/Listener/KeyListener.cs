@@ -10,8 +10,8 @@ public class KeyListener : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (right()) shipMovement.checkSideToMove(true);
-        else if (left()) shipMovement.checkSideToMove(false);
+        if (right()) shipMovement.move(true);
+        else if (left()) shipMovement.move(false);
         else shipMovement.noInput();
     }
 

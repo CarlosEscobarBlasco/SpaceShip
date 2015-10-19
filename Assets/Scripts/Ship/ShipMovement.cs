@@ -31,29 +31,22 @@ public class ShipMovement : MonoBehaviour {
         transform.Translate(0, forwardSpeed * Time.deltaTime, 0, Space.World);
     }
 
-    public void checkSideToMove(bool right)
+    public void move(bool right)
     {
-        if (insideBounds(right)) lateralMovement(right);
+        if (insideBounds(right)) if (right) moveRight(); else moveLeft();
         else noInput();
     }
 
-    private void lateralMovement(bool right)
-    {
-        transform.Translate(right ? moveRight() : moveLeft(), 0, 0, Space.World);
-    }
-
-    private float moveLeft()
+    private void moveLeft()
     {
         transform.Translate(-lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateLeft();
-        return (-1) * lateralSpeed * Time.deltaTime;
     }
 
-    private float moveRight()
+    private void moveRight()
     {
         transform.Translate(lateralSpeed * Time.deltaTime, 0, 0, Space.World);
         rotateRight();
-        return lateralSpeed * Time.deltaTime;
     }
 
     private void rotateLeft()
@@ -68,15 +61,12 @@ public class ShipMovement : MonoBehaviour {
 
     private void ChangeSpeed()
     {
-        if (forwardSpeed < maxSpeed && forwardSpeed > 0)
-        {
-            forwardSpeed += acceleration;
-        }
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0)forwardSpeed += acceleration;
     }
 
-    private void decreaseSpeed(float amount)
+    private void speedReductionByPercentage(float percentage)
     {
-        if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*amount)/100;
+        if (forwardSpeed > 0) forwardSpeed -= (forwardSpeed*percentage)/100;
         if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
@@ -92,7 +82,7 @@ public class ShipMovement : MonoBehaviour {
         {
             Destroy(collider.gameObject);
             //animacion roto
-            decreaseSpeed((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
+            speedReductionByPercentage((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
         }
     }
 
@@ -113,7 +103,8 @@ public class ShipMovement : MonoBehaviour {
 
     public void stopShip()
     {
-        acceleration *= -20;
+        acceleration *= -30;
+        forwardSpeed -= 1;
         Invoke("disableScript", 1);
     }
 
@@ -126,7 +117,5 @@ public class ShipMovement : MonoBehaviour {
             gameObject.GetComponent<TouchListener>().enabled = false;
         }
         else gameObject.GetComponent<ArtificialIntelligence>().enabled = false;
-
-
     }
 }

@@ -30,28 +30,28 @@ public class ArtificialIntelligence : MonoBehaviour
             if (leftCollision() && !rightCollision())
             {
                 betterSideToMove(startMoving || myDirection);
-                movement.checkSideToMove(myDirection);
+                movement.move(myDirection);
             }
             else if (!leftCollision() && rightCollision())
             {
                 betterSideToMove(!startMoving && myDirection);
-                movement.checkSideToMove(myDirection);
+                movement.move(myDirection);
             }
             else //solo el centro o los 3 a la vez
             {
                 betterSideToMove(startMoving ? rightMovement : myDirection);
-                movement.checkSideToMove(myDirection);
+                movement.move(myDirection);
             }
         }
         else if (leftCollision())
         {
             betterSideToMove(startMoving || myDirection);
-            movement.checkSideToMove(myDirection);
+            movement.move(myDirection);
         }
         else if (rightCollision())
         {
             betterSideToMove(!startMoving && myDirection);
-            movement.checkSideToMove(myDirection);
+            movement.move(myDirection);
         }
         else
         {
