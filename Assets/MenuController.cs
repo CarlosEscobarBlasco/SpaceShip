@@ -29,11 +29,17 @@ public class MenuController : MonoBehaviour {
     {
         Application.LoadLevel("Game");
         Debug.Log(selectedShip);
+        //Instantiate(Resources.Load("Prefabs/Ships/Ship1"), Vector3.zero, transform.rotation);
     }
 
     public void selectShip(GameObject ship)
     {
         selectedShip = ship.name;
         startQuickRace();
+    }
+
+    public string getSelectedShip()
+    {
+        return selectedShip;
     }
 }
