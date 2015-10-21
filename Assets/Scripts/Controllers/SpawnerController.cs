@@ -4,6 +4,7 @@ using System.Collections;
 public class SpawnerController : MonoBehaviour {
     public GameObject[] objectsToSpawn;
     private GameObject objectToSpawn;
+    public int speed = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,7 @@ public class SpawnerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.Translate(0, 20 * Time.deltaTime, 0);
+        transform.Translate(0, speed * Time.deltaTime, 0);
     }
 
     IEnumerator spawnController(GameObject objectToSpawn, float spawnTimer, float timeToSpawn)

@@ -123,7 +123,7 @@ public class Controller : MonoBehaviour {
     }
 
     private void createShips(){ //Hacer solo un prefab? y activar/desactivar CPU/Player y el tag?
-        Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
+        //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
