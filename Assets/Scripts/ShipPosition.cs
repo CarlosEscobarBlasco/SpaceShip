@@ -31,7 +31,7 @@ public class ShipPosition : MonoBehaviour {
         {
             GameObject shipIcon = Instantiate(Resources.Load("Prefabs/Ship"),new Vector3(transform.position.x, transform.position.y-i*60, transform.position.z), transform.rotation) as GameObject;
             shipIcon.transform.SetParent(this.transform);
-            shipIcon.transform.localScale = new Vector3(1,1,1);
+            shipIcon.transform.localScale = new Vector3(1.2f,1,1);
             shipIcon.GetComponentInChildren<Text>().text = i + 1 + "º";
             if(ships[i].tag=="Player")shipIcon.GetComponentInChildren<Text>().color = Color.yellow;
             shipIcon.GetComponentInChildren<Image>().sprite = ships[i].GetComponent<SpriteRenderer>().sprite;
