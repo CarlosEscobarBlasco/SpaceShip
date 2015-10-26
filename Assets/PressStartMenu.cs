@@ -7,13 +7,9 @@ public class PressStartMenu : MonoBehaviour {
     public GameObject menuControllerGO;
     private MenuController menuController;
     public Text pressStart; 
-    private float counter;
-    private float initialCounter;
     // Use this for initialization
 	void Start () {
         menuController = menuControllerGO.GetComponent<MenuController>();
-	    initialCounter = 0.5f;
-	    counter = initialCounter;
         blinkerText();
     }
 	
