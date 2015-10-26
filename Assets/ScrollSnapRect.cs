@@ -59,6 +59,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     // container with Image components - one Image for each page
     private List<Image> _pageSelectionImages;
 
+    public MenuSlidersController sliderController;
     //------------------------------------------------------------------------
     void Start() {
         _scrollRectComponent = GetComponent<ScrollRect>();
@@ -176,6 +177,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
+        sliderController.refreshValues();
     }
 
     //------------------------------------------------------------------------
