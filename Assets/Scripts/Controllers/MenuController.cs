@@ -26,7 +26,7 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(false);
     }
 
-    /*private void startQuickRace()
+    private void startQuickRace()
     {
         Application.LoadLevel("Game");
         Debug.Log(selectedShip);
@@ -41,7 +41,7 @@ public class MenuController : MonoBehaviour {
     public string getSelectedShip()
     {
         return selectedShip;
-    }*/
+    }
 
     //funcion back movil
 
