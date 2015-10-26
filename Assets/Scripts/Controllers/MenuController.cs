@@ -10,6 +10,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        mainPanel.SetActive(true);
         shipsPanel.SetActive(false);
         DontDestroyOnLoad(transform.gameObject);
 	}
@@ -19,13 +20,13 @@ public class MenuController : MonoBehaviour {
 	
 	}
 
-    public void quickRace()
+    public void goToShipSelectionMenu()
     {
         shipsPanel.SetActive(true);
         mainPanel.SetActive(false);
     }
 
-    private void startQuickRace()
+    /*private void startQuickRace()
     {
         Application.LoadLevel("Game");
         Debug.Log(selectedShip);
@@ -36,4 +37,12 @@ public class MenuController : MonoBehaviour {
         selectedShip = ship.name;
         startQuickRace();
     }
+
+    public string getSelectedShip()
+    {
+        return selectedShip;
+    }*/
+
+    //funcion back movil
+
 }
