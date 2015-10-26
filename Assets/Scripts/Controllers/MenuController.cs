@@ -29,7 +29,7 @@ public class MenuController : MonoBehaviour {
     private void startQuickRace()
     {
         Application.LoadLevel("Game");
-        Debug.Log(selectedShip);
+        //Debug.Log(selectedShip);
     }
 
     public void selectShip(GameObject ship)

@@ -22,7 +22,6 @@ public class Controller : MonoBehaviour {
 
     void Awake()
     {
-        //Instantiate(Resources.Load("Prefabs/Ships/Ship1"), Vector3.zero, transform.rotation);
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         createShips();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -123,7 +122,7 @@ public class Controller : MonoBehaviour {
     }
 
     private void createShips(){ //Hacer solo un prefab? y activar/desactivar CPU/Player y el tag?
-        //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
+        Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), new Vector3(-2,-3.5f,0), transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
         //Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), Vector3.zero, transform.rotation);
