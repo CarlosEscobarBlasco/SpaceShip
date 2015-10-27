@@ -59,7 +59,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     // container with Image components - one Image for each page
     private List<Image> _pageSelectionImages;
 
-    public MenuSlidersController sliderController;
+    public WorldMenuSlidersController worldMenusliderController;
+    public ShipMenuSlidersController shipMenusliderController;
     //------------------------------------------------------------------------
     void Start() {
         _scrollRectComponent = GetComponent<ScrollRect>();
@@ -177,7 +178,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
-        sliderController.refreshValues(aPageIndex);
+        if (worldMenusliderController) worldMenusliderController.refreshValues(aPageIndex + 1);
+        else shipMenusliderController.refreshValues(aPageIndex + 1);
     }
 
     //------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuSlidersController : MonoBehaviour {
+public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 
     public Slider accelerationSlider;
     public Slider maxSpeedSlider;
