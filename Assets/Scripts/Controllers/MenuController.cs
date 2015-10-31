@@ -21,15 +21,10 @@ public class MenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Input.GetKey(KeyCode.Escape)){
-            if (shipsPanel.activeSelf)
-            {
-                goToWorldSelectionMenu();
-            }
-            else if (worldsPanel.activeSelf)
-            {
-                goToMainMenu();
-            }
+	    if(Input.GetKeyDown(KeyCode.Escape)){
+            if (shipsPanel.activeSelf) goToMainMenu();
+            else if (worldsPanel.activeSelf) goToShipSelectionMenu();
+            else if(mainPanel.activeSelf) Application.Quit();
         }
 	}
 
@@ -62,7 +57,7 @@ public class MenuController : MonoBehaviour {
     public void selectShip(GameObject ship)
     {
         selectedShip = ship.name;
-        startQuickRace();
+        goToWorldSelectionMenu();
     }
 
     public string getSelectedShip()
@@ -73,7 +68,7 @@ public class MenuController : MonoBehaviour {
     public void selectWorld(GameObject world)
     {
         selectedWorld = world.name;
-        goToShipSelectionMenu();
+        startQuickRace();
     }
 
     public string getSelectedWorld()
