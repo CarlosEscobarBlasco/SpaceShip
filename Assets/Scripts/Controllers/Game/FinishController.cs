@@ -10,10 +10,12 @@ public class FinishController : MonoBehaviour
     private GameObject spawner;
     public Text finalPosition;
 
+    public FinishSliderController finishSliderController;
 	// Use this for initialization
 	void Start ()
 	{
 	    controller = gameController.GetComponent<Controller>();
+	    finishSliderController.setDistance(this.transform.position.y);
 	}
 	
 	// Update is called once per frame
