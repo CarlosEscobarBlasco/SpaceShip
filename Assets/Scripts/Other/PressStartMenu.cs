@@ -14,9 +14,15 @@ public class PressStartMenu : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        if (Input.touchCount >= 1 || Input.GetMouseButton(0)) menuController.goToShipSelectionMenu();
+	void Update ()
+	{
+        if (checkInput()) menuController.goToShipSelectionMenu();
 	}
+
+    private static bool checkInput()
+    {
+        return Input.touchCount >= 1 || Input.GetMouseButton(0);
+    }
 
     private void blinkerText()
     {

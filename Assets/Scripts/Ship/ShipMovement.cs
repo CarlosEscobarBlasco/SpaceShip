@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(ShipData))]
@@ -113,8 +114,14 @@ public class ShipMovement : MonoBehaviour {
         gameObject.GetComponent<ShipMovement>().enabled = false;
         if (gameObject.tag == "Player")
         {
-            gameObject.GetComponent<KeyListener>().enabled = false;
-            gameObject.GetComponent<TouchListener>().enabled = false;
+            try
+            {
+                gameObject.GetComponent<KeyListener>().enabled = false;
+                gameObject.GetComponent<TouchListener>().enabled = false;
+            }
+            catch
+            {
+            }
         }
         else gameObject.GetComponent<ArtificialIntelligence>().enabled = false;
     }
