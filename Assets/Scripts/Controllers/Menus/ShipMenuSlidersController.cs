@@ -8,12 +8,16 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
     public Slider maxSpeedSlider;
     public Slider gripSlider;
     public Text shipNameText;
+    private MenuController menuController;
     private float maxAcc;
     private float maxGrip;
     private float maxSpeed;
+    private int actualShip;
 
 	// Use this for initialization
 	void Start () {
+        menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
+
         accelerationSlider.maxValue = 0.015f;
         accelerationSlider.minValue = 0;
         maxSpeedSlider.maxValue = 15;
@@ -40,5 +44,11 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
         maxSpeed = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getMaxSpeed();
         maxGrip = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getLateralSpeeed();
         shipNameText.text = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getShipName();
+        this.actualShip=actualShip;
+    }
+
+    public void setShipToController()
+    {
+        menuController.selectShip("Ship" + actualShip);
     }
 }

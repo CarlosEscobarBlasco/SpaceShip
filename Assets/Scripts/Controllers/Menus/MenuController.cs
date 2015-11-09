@@ -54,9 +54,9 @@ public class MenuController : MonoBehaviour {
         Application.LoadLevel("Game");
     }
 
-    public void selectShip(GameObject ship)
+    public void selectShip(string ship)
     {
-        selectedShip = ship.name;
+        selectedShip = ship;
         goToWorldSelectionMenu();
     }
 
@@ -65,9 +65,9 @@ public class MenuController : MonoBehaviour {
         return selectedShip;
     }
 
-    public void selectWorld(GameObject world)
+    public void selectWorld(string world, int difficulty)
     {
-        selectedWorld = world.name;
+        selectedWorld = world;
         startQuickRace();
     }
 
