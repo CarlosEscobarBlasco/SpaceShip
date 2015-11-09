@@ -4,8 +4,7 @@ using System.Collections;
 
 public class WorldMenuSlidersController : MonoBehaviour, MenuSliderController{
 
-    public Slider accelerationSlider;
-    public Slider maxSpeedSlider;
+    public Text name;
 
     void Start()
     {
@@ -17,8 +16,8 @@ public class WorldMenuSlidersController : MonoBehaviour, MenuSliderController{
 
     }
 
-    public void refreshValues(int actualShip)
+    public void refreshValues(int actualWorld)
     {
-        
+        name.text=transform.GetChild(0).GetChild(actualWorld - 1).name;
     }
 }
