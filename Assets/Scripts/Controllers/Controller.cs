@@ -8,12 +8,9 @@ public class Controller : MonoBehaviour {
 
     public Camera mainCamera;
     public GameObject destroyer;
-
     private List<GameObject> ships;
     private GameObject player;
-
     private bool changePosition;
-
     private MenuController menuController;
 
     void Awake()
