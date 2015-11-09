@@ -15,7 +15,6 @@ public class MenuDestroyer : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D obj)
     {
-        Debug.Log(obj);
         Destroy(obj.gameObject);
     }
 }
