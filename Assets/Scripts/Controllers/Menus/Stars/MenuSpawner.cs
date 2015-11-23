@@ -36,7 +36,7 @@ public class MenuSpawner : MonoBehaviour
 
     Vector3 randomPosition(GameObject objectToSpawn)
     {
-        return new Vector3(objectToSpawn.transform.position.x, Random.Range(0f, 900f), objectToSpawn.transform.position.z);
+        return new Vector3(objectToSpawn.transform.position.x, Random.Range(0f, 600), objectToSpawn.transform.position.z);
     }
 
 
