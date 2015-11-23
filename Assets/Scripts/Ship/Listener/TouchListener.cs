@@ -16,8 +16,8 @@ public class TouchListener : MonoBehaviour
 	void Update () {
 	    if (Input.touchCount == 1)
 	    {
-	        if (Input.GetTouch(0).position.x < 180)lastMove = false;
-	        if (Input.GetTouch(0).position.x >= 180)lastMove = true;
+	        if (Input.GetTouch(0).position.x < Camera.main.pixelWidth/2 /*  180*/)lastMove = false;
+            if (Input.GetTouch(0).position.x >= Camera.main.pixelWidth / 2 /*180*/) lastMove = true;
             movement.move(lastMove);
         }else if (Input.touchCount > 1)movement.move(!lastMove);
         else movement.noInput();
