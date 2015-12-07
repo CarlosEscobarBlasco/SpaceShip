@@ -11,7 +11,7 @@ public class MenuController : MonoBehaviour {
     public GameObject gameSelector;
 
     private string selectedShip;
-    private List<string> rivalShips;
+    private List<string> rivalShips = new List<string>();
     private string selectedWorld;
 
 	// Use this for initialization
@@ -72,13 +72,27 @@ public class MenuController : MonoBehaviour {
     public void selectShip(string ship)
     {
         selectedShip = ship;
-
+        for (int i = 1; i <= 5; i++)
+        {
+            if(selectedShip!="Ship"+i)rivalShips.Add("Ship"+i);
+        }
         goToWorldSelectionMenu();
     }
 
     public string getSelectedShip()
     {
         return selectedShip;
+    }
+
+    public List<string> getRivalShips()
+    {
+        shuffleRivalShips();
+        return rivalShips;
+    }
+
+    private void shuffleRivalShips()
+    {
+        rivalShips.Sort((a, b) => 1 - 2*Random.Range(0, 1));
     }
 
     public void selectWorld(string world, int difficulty)
