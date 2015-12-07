@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MenuController : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class MenuController : MonoBehaviour {
     public GameObject gameSelector;
 
     private string selectedShip;
+    private List<string> rivalShips;
     private string selectedWorld;
 
 	// Use this for initialization
@@ -70,6 +72,7 @@ public class MenuController : MonoBehaviour {
     public void selectShip(string ship)
     {
         selectedShip = ship;
+
         goToWorldSelectionMenu();
     }
 
