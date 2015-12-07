@@ -7,6 +7,7 @@ public class MenuController : MonoBehaviour {
     public GameObject mainPanel;
     public GameObject worldsPanel;
     public GameObject shipsPanel;
+    public GameObject gameSelector;
 
     private string selectedShip;
     private string selectedWorld;
@@ -22,8 +23,9 @@ public class MenuController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if(Input.GetKeyDown(KeyCode.Escape)){
-            if (shipsPanel.activeSelf) goToMainMenu();
+            if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
+            else if(gameSelector.activeSelf) goToMainMenu();
             else if(mainPanel.activeSelf) Application.Quit();
         }
 	}
@@ -33,6 +35,7 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(true);
+        gameSelector.SetActive(false);
     }
 
     public void goToShipSelectionMenu()
@@ -40,6 +43,7 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(true);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
+        gameSelector.SetActive(false);
     }
 
     public void goToMainMenu()
@@ -47,6 +51,15 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
+        gameSelector.SetActive(false);
+    }
+
+    public void goToGameSelector()
+    {
+        shipsPanel.SetActive(false);
+        mainPanel.SetActive(false);
+        worldsPanel.SetActive(false);
+        gameSelector.SetActive(true);
     }
 
     private void startQuickRace()

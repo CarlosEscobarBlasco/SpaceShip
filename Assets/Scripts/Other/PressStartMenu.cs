@@ -4,19 +4,17 @@ using UnityEngine.UI;
 
 public class PressStartMenu : MonoBehaviour {
 
-    public GameObject menuControllerGO;
-    private MenuController menuController;
+    public MenuController menuController;
     public Text pressStart; 
     // Use this for initialization
 	void Start () {
-        menuController = menuControllerGO.GetComponent<MenuController>();
         blinkerText();
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-        if (checkInput()) menuController.goToShipSelectionMenu();
+        if (checkInput()) menuController.goToGameSelector();
 	}
 
     private static bool checkInput()
