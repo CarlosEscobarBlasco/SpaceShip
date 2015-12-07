@@ -100,17 +100,18 @@ public class Controller : MonoBehaviour {
         GameObject ship;
         ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), new Vector3(-2,-3.5f,0), transform.rotation) as GameObject;
         ship.GetComponent<KeyListener>().enabled = true;
+        ship.tag = "Player";
         ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[0]), new Vector3(2,-3.5f,0), transform.rotation) as GameObject;
         ship.GetComponent<AIPlus>().enabled = true;
         ship.GetComponent<ArtificialIntelligence>().enabled = true;
+        ship.tag = "CPU";
         ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[1]), new Vector3(-0.75f,-3.5f,0), transform.rotation) as GameObject;
         ship.GetComponent<AIPlus>().enabled = true;
         ship.GetComponent<ArtificialIntelligence>().enabled = true;
+        ship.tag = "CPU";
         ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[2]), new Vector3(0.75f,-3.5f,0), transform.rotation) as GameObject;
         ship.GetComponent<AIPlus>().enabled = true;
         ship.GetComponent<ArtificialIntelligence>().enabled = true;
-        /*ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[3]), new Vector3(-2,-3.5f,0), transform.rotation) as GameObject;
-        ship.GetComponent<AIPlus>().enabled = true;
-        ship.GetComponent<ArtificialIntelligence>().enabled = true;*/
+        ship.tag = "CPU";
     }
 }
