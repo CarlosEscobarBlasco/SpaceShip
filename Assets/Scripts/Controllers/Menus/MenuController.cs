@@ -86,13 +86,20 @@ public class MenuController : MonoBehaviour {
 
     public List<string> getRivalShips()
     {
-        shuffleRivalShips();
+        shuffle(rivalShips);
         return rivalShips;
     }
 
-    private void shuffleRivalShips()
+    public static void shuffle(IList<string> list)  
     {
-        rivalShips.Sort((a, b) => 1 - 2*Random.Range(0, 1));
+        int n = list.Count;  
+        while (n > 1) {  
+            n--;
+            int k = Random.Range(n, list.Count);
+            string value = list[k];  
+            list[k] = list[n];  
+            list[n] = value;  
+        }  
     }
 
     public void selectWorld(string world, int difficulty)
