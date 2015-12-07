@@ -6,7 +6,7 @@ public class ShieldPowerUp : MonoBehaviour, PowerUp
 {
     // Use this for initialization
 	void Start () {
-	    
+        player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -18,6 +18,7 @@ public class ShieldPowerUp : MonoBehaviour, PowerUp
     {
         //Activar Escudo
         Debug.Log("Escudo activado!");
+        player.GetComponent<ShipMovement>().activeShield();
     }
 
     public GameObject player { get; set; }

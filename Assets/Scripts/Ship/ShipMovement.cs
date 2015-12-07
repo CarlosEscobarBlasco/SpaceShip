@@ -11,6 +11,7 @@ public class ShipMovement : MonoBehaviour {
     private float lateralSpeed;
     private float acceleration;
     private float maxSpeed;
+    private bool shield;
 
     // Use this for initialization
     void Start ()
@@ -19,6 +20,7 @@ public class ShipMovement : MonoBehaviour {
         lateralSpeed = gameObject.GetComponent<ShipData>().getLateralSpeeed();
         acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
         maxSpeed= gameObject.GetComponent<ShipData>().getMaxSpeed();
+        shield = false;
     }
 	
 	// Update is called once per frame
@@ -60,6 +62,12 @@ public class ShipMovement : MonoBehaviour {
         transform.rotation = new Quaternion(0.0f, 0.0f, -0.2f, 1.0f);
     }
 
+    public void activeShield()
+    {
+        //animacion shield
+        shield = true;
+    }
+
     private void ChangeSpeed()
     {
         if (forwardSpeed < maxSpeed && forwardSpeed > 0)forwardSpeed += acceleration;
@@ -81,9 +89,14 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag == "Obstacle")
         {
-            Destroy(collider.gameObject);
-            //animacion roto
-            speedReductionByPercentage((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
+            if (!shield)
+            {
+                Destroy(collider.gameObject);
+                //animacion roto
+                speedReductionByPercentage((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
+            }
+            else shield = false;
+
         }
     }
 
@@ -95,6 +108,11 @@ public class ShipMovement : MonoBehaviour {
     public float getForwardSpeed()
     {
         return forwardSpeed;
+    }
+
+    public void setForwardSpeed(float speed)
+    {
+        forwardSpeed = speed;
     }
 
     public float getMaxSpeed()
