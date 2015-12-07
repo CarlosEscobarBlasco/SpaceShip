@@ -16,9 +16,8 @@ public class SpeedPowerUp : MonoBehaviour, PowerUp {
     public void execute()
     {
         //subirle la velocidad a tope al player
+        Debug.Log("Velocidad a tope!");
     }
-
-    public Sprite icon { get; set; }
 
     public GameObject player { get; set; }
 }

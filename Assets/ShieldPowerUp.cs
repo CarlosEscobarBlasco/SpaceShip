@@ -6,7 +6,7 @@ public class ShieldPowerUp : MonoBehaviour, PowerUp
 {
     // Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
@@ -17,9 +17,8 @@ public class ShieldPowerUp : MonoBehaviour, PowerUp
     public void execute()
     {
         //Activar Escudo
+        Debug.Log("Escudo activado!");
     }
-
-    public Sprite icon { get; set; }
 
     public GameObject player { get; set; }
 }

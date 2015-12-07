@@ -16,9 +16,8 @@ public class RocketPowerUp : MonoBehaviour, PowerUp {
     public void execute()
     {
         //disparar el misil
+        Debug.Log("Misil lanzado");
     }
-
-    public Sprite icon { get; set; }
 
     public GameObject player { get; set; }
 }

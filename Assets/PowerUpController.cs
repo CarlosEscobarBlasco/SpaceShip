@@ -6,14 +6,19 @@ public class PowerUpController : MonoBehaviour
 {
     private float powerUpCoolDown;
     public Image powerUpImage;
-    private PowerUp actualPoweUp;
-    public Button powerUpButton;
+    private PowerUp actualPowerUp;
+    public GameObject powerUpButton;
+
+    public Sprite ShieldSprite;
+    public Sprite SpeedSprite;
+    public Sprite RocketSprite;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    powerUpCoolDown = 10;
 	    changePowerUp();
+        disabledPowerUpButton();
 	}
 	
 	// Update is called once per frame
@@ -29,7 +34,7 @@ public class PowerUpController : MonoBehaviour
     public void activatePowerUp()
     {
         powerUpCoolDown = 10;
-        actualPoweUp.execute();
+        actualPowerUp.execute();
         changePowerUp();
         disabledPowerUpButton();
     }
@@ -39,25 +44,27 @@ public class PowerUpController : MonoBehaviour
         switch (Random.Range(1, 4))
         {
             case 1:
-                actualPoweUp = new RocketPowerUp();
+                actualPowerUp = gameObject.AddComponent<RocketPowerUp>();
+                powerUpImage.sprite = RocketSprite;
                 break;
             case 2:
-                actualPoweUp = new ShieldPowerUp();
+                actualPowerUp = gameObject.AddComponent<ShieldPowerUp>();
+                powerUpImage.sprite = ShieldSprite;
                 break;
             case 3:
-                actualPoweUp = new SpeedPowerUp();
+                actualPowerUp = gameObject.AddComponent<SpeedPowerUp>();
+                powerUpImage.sprite = SpeedSprite;
                 break;
         }
-        powerUpImage.sprite = actualPoweUp.icon;
     }
 
     private void activePowerUpButton()
     {
-        powerUpButton.enabled = true;
+        powerUpButton.SetActive(true);
     }
 
     private void disabledPowerUpButton()
     {
-        powerUpButton.enabled = false;
+        powerUpButton.SetActive(false);
     }
 }
