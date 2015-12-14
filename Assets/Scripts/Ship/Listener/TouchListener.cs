@@ -23,7 +23,7 @@ public class TouchListener : MonoBehaviour
 	    } //else if (Input.touchCount > 1) movement.move(!lastMove);
 	    else
 	    {
-	        if (timer <= 0)
+	        if (timer <= 0 && GetComponent<ShipPowerUp>().isPowerUpActive())
 	        {
 	            GetComponent<ShipPowerUp>().activatePowerUp();
                 //print("Lanzar power up");

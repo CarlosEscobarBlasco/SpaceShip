@@ -19,7 +19,7 @@ public class KeyListener : MonoBehaviour {
 
     private void powerUp()
     {
-        if (timer <= 0)
+        if (timer <= 0 && GetComponent<ShipPowerUp>().isPowerUpActive())
         {
             GetComponent<ShipPowerUp>().activatePowerUp();
             //print("Lanzar power up");

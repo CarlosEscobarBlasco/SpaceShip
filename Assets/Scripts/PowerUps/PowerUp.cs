@@ -4,6 +4,6 @@ using UnityEngine.UI;
 
 public interface PowerUp
 {
-    void execute();
-    GameObject player { get; set; }
+    void execute(GameObject ship);
+    //GameObject player { get; set; }
 }

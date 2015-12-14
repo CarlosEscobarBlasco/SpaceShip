@@ -21,6 +21,6 @@ public class UIPositionController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    actualPosition.text = controller.positionOf(player).ToString();
+	    actualPosition.text = controller.positionOf(player).ToString() + "º";
 	}
 }

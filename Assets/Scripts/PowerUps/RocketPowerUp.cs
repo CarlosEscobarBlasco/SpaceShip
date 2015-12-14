@@ -5,7 +5,7 @@ public class RocketPowerUp : MonoBehaviour, PowerUp {
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -13,11 +13,11 @@ public class RocketPowerUp : MonoBehaviour, PowerUp {
 	
 	}
 
-    public void execute()
+    public void execute(GameObject ship)
     {
         //disparar el misil
         Debug.Log("Misil lanzado");
     }
 
-    public GameObject player { get; set; }
+    //public GameObject player { get; set; }
 }

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class PowerUpController : MonoBehaviour
 {
-    private float powerUpCoolDown;
     public Image powerUpImage;
-    private PowerUp actualPowerUp;
+    private int currentPowerUp;
     public GameObject powerUpButton;
+    private GameObject player;
 
     public Sprite ShieldSprite;
     public Sprite SpeedSprite;
@@ -16,7 +16,8 @@ public class PowerUpController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    powerUpCoolDown = 10;
+        player = GameObject.FindGameObjectWithTag("Player");
+        //Debug.Log(player);
 	    changePowerUp();
         disabledPowerUpButton();
 	}
@@ -24,35 +25,26 @@ public class PowerUpController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        powerUpCoolDown -= Time.deltaTime;
-	    if (powerUpCoolDown <= 0)
+	    if (player.GetComponent<ShipPowerUp>().isPowerUpActive())
 	    {
 	        activePowerUpButton();
+            changePowerUp();
 	    }
+        else disabledPowerUpButton();
+	    currentPowerUp = player.GetComponent<ShipPowerUp>().getPowerUp();
 	}
-
-    public void activatePowerUp()
-    {
-        powerUpCoolDown = 10;
-        actualPowerUp.execute();
-        changePowerUp();
-        disabledPowerUpButton();
-    }
 
     private void changePowerUp()
     {
-        switch (Random.Range(1, 4))
+        switch (currentPowerUp)
         {
             case 1:
-                actualPowerUp = gameObject.AddComponent<RocketPowerUp>();
                 powerUpImage.sprite = RocketSprite;
                 break;
             case 2:
-                actualPowerUp = gameObject.AddComponent<ShieldPowerUp>();
                 powerUpImage.sprite = ShieldSprite;
                 break;
             case 3:
-                actualPowerUp = gameObject.AddComponent<SpeedPowerUp>();
                 powerUpImage.sprite = SpeedSprite;
                 break;
         }
