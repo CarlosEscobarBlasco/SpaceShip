@@ -11,6 +11,7 @@ public class FinishController : MonoBehaviour
     public Text finalPosition;
 
     public FinishSliderController finishSliderController;
+    public UIPositionController positionController;
 	// Use this for initialization
 	void Start ()
 	{
@@ -32,7 +33,10 @@ public class FinishController : MonoBehaviour
         if (collider.tag == "CPU" || collider.tag == "Player")
         {
             collider.gameObject.GetComponent<ShipMovement>().stopShip();
-            if(collider.tag=="Player") showPosition(collider.gameObject);
+            if (collider.tag == "Player")
+            {
+                showPosition(collider.gameObject);
+            }
         }else if (collider.tag == "Spawner")
         {
             spawner = collider.gameObject;
@@ -48,5 +52,6 @@ public class FinishController : MonoBehaviour
     void showPosition(GameObject ship)
     {
         finalPosition.text = controller.GetComponent<Controller>().positionOf(ship) + "º";
+        positionController.setPosition(finalPosition.text);
     }
 }
