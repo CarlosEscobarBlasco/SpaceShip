@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class MenuController : MonoBehaviour {
@@ -31,9 +32,14 @@ public class MenuController : MonoBehaviour {
             if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
             else if(gameSelector.activeSelf) goToMainMenu();
-            else if(mainPanel.activeSelf) Application.Quit();
+            else if(mainPanel.activeSelf) exitApp();
         }
 	}
+
+    public void exitApp()
+    {
+        Application.Quit();
+    }
 
     public void goToWorldSelectionMenu()
     {
@@ -69,12 +75,12 @@ public class MenuController : MonoBehaviour {
 
     public void startQuickRace()
     {
-        Application.LoadLevel("Game");
+        SceneManager.LoadScene("Game");
     }
 
     public void returnMenu()
     {
-        Application.LoadLevel("Menus");
+        SceneManager.LoadScene("Menus");
         Destroy(this.gameObject);
     }
 

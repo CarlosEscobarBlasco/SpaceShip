@@ -4,8 +4,8 @@ using System.Collections;
 
 public class WorldMenuSlidersController : MonoBehaviour, MenuSliderController{
 
-    public Text name;
-    private int actualWorld;
+    public Text worldName;
+    //private int actualWorld;
     private MenuController menuController;
 
     void Start()
@@ -21,12 +21,12 @@ public class WorldMenuSlidersController : MonoBehaviour, MenuSliderController{
 
     public void refreshValues(int actualWorld)
     {
-        name.text=transform.GetChild(0).GetChild(actualWorld - 1).name;
-        this.actualWorld = actualWorld;
+        worldName.text = transform.GetChild(0).GetChild(actualWorld - 1).name;
+        //this.actualWorld = actualWorld;
     }
 
     public void setPlanetToController(int difficulty)
     {
-        menuController.selectWorld(name.text, difficulty);
+        menuController.selectWorld(worldName.text, difficulty);
     }
 }
