@@ -8,18 +8,22 @@ public class Controller : MonoBehaviour {
 
     public Camera mainCamera;
     public GameObject destroyer;
+    public PauseController PauseController;
+    public Text backCount;
 
     private List<GameObject> ships;
     private GameObject player;
     private bool changePosition;
     private MenuController menuController;
     private List<string> rivalShips;
+    private bool initialTime;
 
     void Awake()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         ships = new List<GameObject>();
-        createShips();       
+        createShips();
+        initialTime = true;
     }
 
 	// Use this for initialization
@@ -31,6 +35,7 @@ public class Controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+	    if (initialTime) StartCoroutine(startBackCount());
 	    sortArrayShips();
 	    setDestroyerToLastShip();
 	}
@@ -143,4 +148,27 @@ public class Controller : MonoBehaviour {
         ship.tag = "CPU";
         ships.Add(ship);
     }
+
+    private IEnumerator startBackCount()
+    {
+        for (int i = 0; i < ships.Count; i++)
+        {
+            if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = false;
+            ships[i].GetComponent<ShipMovement>().enabled = false;
+        }
+        backCount.text = "3";
+        yield return new WaitForSeconds(1);
+        backCount.text = "2";
+        yield return new WaitForSeconds(1);
+        backCount.text = "1";
+        yield return new WaitForSeconds(1);
+        backCount.text = "";
+        for (int i = 0; i < ships.Count; i++)
+        {
+            if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = true;
+            ships[i].GetComponent<ShipMovement>().enabled = true;
+        }
+        initialTime = false;
+    }
+
 }

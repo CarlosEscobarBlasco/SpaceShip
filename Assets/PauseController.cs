@@ -26,16 +26,16 @@ public class PauseController : MonoBehaviour
         menuController.returnMenu();
     }
 
-    public void pauseGame()
+    public void activePauseGame()
     {
-        Time.timeScale = 0.0f;
-        spawner.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
-        foreach (GameObject go in objects)
-        {
-            go.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
-        }
         pausePanel.SetActive(true);
+        pauseGame();
+    }
+
+    public void cancelPauseGame()
+    {
+        pausePanel.SetActive(false);
+        resumeGame();
     }
 
     public void resumeGame()
@@ -47,7 +47,18 @@ public class PauseController : MonoBehaviour
         }
         spawner.SendMessage("OnResumeGame", SendMessageOptions.DontRequireReceiver);
         Time.timeScale = 1;
-        pausePanel.SetActive(false);
+        
+    }
+
+    public void pauseGame()
+    {
+        Time.timeScale = 0.0f;
+        spawner.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject go in objects)
+        {
+            go.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
 
