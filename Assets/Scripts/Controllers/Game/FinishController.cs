@@ -9,6 +9,7 @@ public class FinishController : MonoBehaviour
     private Controller controller;
     private GameObject spawner;
     public Text finalPosition;
+    public FinishPanelController finalPanel;
 
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
@@ -33,9 +34,12 @@ public class FinishController : MonoBehaviour
         if (collider.tag == "CPU" || collider.tag == "Player")
         {
             collider.gameObject.GetComponent<ShipMovement>().stopShip();
+            collider.gameObject.GetComponent<ShipStatistics>().stopStatistics();
             if (collider.tag == "Player")
             {
                 showPosition(collider.gameObject);
+                finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
+                Invoke("showFinalPanel",2);
             }
         }else if (collider.tag == "Spawner")
         {
@@ -53,5 +57,10 @@ public class FinishController : MonoBehaviour
     {
         finalPosition.text = controller.GetComponent<Controller>().positionOf(ship) + "º";
         positionController.setPosition(finalPosition.text);
+    }
+
+    void showFinalPanel()
+    {
+        finalPanel.show();
     }
 }

@@ -11,20 +11,22 @@ public class ArtificialIntelligence : MonoBehaviour
     private RaycastHit2D hitRight;
     private bool startMoving;
     private bool myDirection;
+    private float visionDistance;
 
     // Use this for initialization
     void Start()
     {
         movement = GetComponent<ShipMovement>();
         startMoving = true;
+        visionDistance = 3;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        hitCenter = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), Vector2.up, 3, 1);
-        hitLeft = Physics2D.Raycast(new Vector2(transform.position.x - 0.6f, transform.position.y + 1), Vector2.up, 3, 1);
-        hitRight = Physics2D.Raycast(new Vector2(transform.position.x + 0.6f, transform.position.y + 1), Vector2.up, 3, 1);
+        hitCenter = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 1), Vector2.up, visionDistance, 1);
+        hitLeft = Physics2D.Raycast(new Vector2(transform.position.x - 0.6f, transform.position.y + 1), Vector2.up, visionDistance, 1);
+        hitRight = Physics2D.Raycast(new Vector2(transform.position.x + 0.6f, transform.position.y + 1), Vector2.up, visionDistance, 1);
         if (centerCollision())
         {
             if (leftCollision() && !rightCollision())
@@ -105,5 +107,36 @@ public class ArtificialIntelligence : MonoBehaviour
             return false;
         }
         else return true;
+    }
+
+
+    public void setDifficulty(int difficulty)
+    {
+        switch (difficulty)
+        {
+            case 1: easy();
+                break;
+            case 2: med();
+                break;
+            case 3: hard();
+                break;
+        }
+    }
+    private void easy()
+    {
+        GetComponent<AIPlus>().setDistance(1000);
+        visionDistance = 3;
+    }
+
+    private void med()
+    {
+        GetComponent<AIPlus>().setDistance(50);
+        visionDistance = 3.5f;
+    }
+
+    private void hard()
+    {
+        GetComponent<AIPlus>().setDistance(10);
+        visionDistance = 3.75f;
     }
 }

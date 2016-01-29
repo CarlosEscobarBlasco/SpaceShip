@@ -91,9 +91,10 @@ public class ShipMovement : MonoBehaviour {
         {
             if (!shield)
             {
-                Destroy(collider.gameObject);
+                collider.gameObject.GetComponent<MeteorDestroyer>().destroyMeteor();
                 //animacion roto
-                speedReductionByPercentage((collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage()));
+                speedReductionByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
+                GetComponent<ShipStatistics>().increaseCollisionStatistic();
             }
             else shield = false;
 
