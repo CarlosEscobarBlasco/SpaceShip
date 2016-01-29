@@ -6,6 +6,7 @@ public class PauseController : MonoBehaviour
 
     private MenuController menuController;
     public GameObject pausePanel;
+    public GameObject spawner;
 
     // Use this for initialization
     void Start()
@@ -28,11 +29,23 @@ public class PauseController : MonoBehaviour
     public void pauseGame()
     {
         Time.timeScale = 0.0f;
+        spawner.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject go in objects)
+        {
+            go.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+        }
         pausePanel.SetActive(true);
     }
 
     public void resumeGame()
     {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject go in objects)
+        {
+            go.SendMessage("OnResumeGame", SendMessageOptions.DontRequireReceiver);
+        }
+        spawner.SendMessage("OnResumeGame", SendMessageOptions.DontRequireReceiver);
         Time.timeScale = 1;
         pausePanel.SetActive(false);
     }

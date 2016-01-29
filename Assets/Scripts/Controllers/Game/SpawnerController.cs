@@ -6,8 +6,12 @@ public class SpawnerController : MonoBehaviour {
     private GameObject objectToSpawn;
     public int speed = 0;
 
+    private bool paused;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+	    paused = false;
         foreach(GameObject objectToSpawn in objectsToSpawn)
         {
             SpawnData data = objectToSpawn.GetComponent<SpawnData>();
@@ -23,11 +27,13 @@ public class SpawnerController : MonoBehaviour {
     IEnumerator spawnController(GameObject objectToSpawn, float spawnTimer, float timeToSpawn)
     {
         yield return new WaitForSeconds(timeToSpawn);
-        while (true)
+        while (!paused)
         {
+            Debug.Log(paused);
             yield return new WaitForSeconds(Random.Range(spawnTimer / 3, spawnTimer));
             spawn(objectToSpawn);
         }
+        StartCoroutine(spawnController(objectToSpawn, spawnTimer, 0));
     }
 
     void spawn(GameObject objectToSpawn)
@@ -38,6 +44,16 @@ public class SpawnerController : MonoBehaviour {
     Vector3 randomPosition(GameObject objectToSpawn)
     {
         return new Vector3(Random.Range(-2.4f, 2.4f), gameObject.transform.position.y, objectToSpawn.transform.position.z);
+    }
+
+    void OnPauseGame()
+    {
+        paused = true;
+    }
+
+    void OnResumeGame()
+    {
+        paused = false;
     }
 
 }

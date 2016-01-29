@@ -5,10 +5,12 @@ public class ObjectsMovement : MonoBehaviour
 {
     private float rotationSpeed;
     private float fallSpeed;
+    private bool paused;
 
 	// Use this for initialization
 	void Start ()
 	{
+	    paused = false;
 	    rotationSpeed = Random.Range(-30, 30);
 	    fallSpeed = Random.Range(0f, 0.025f);
 	}
@@ -16,8 +18,11 @@ public class ObjectsMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        rotateObject();
-        moveDownObject();
+	    if (!paused)
+	    {
+            rotateObject();
+            moveDownObject();
+	    }
     }
 
     private void moveDownObject()
@@ -28,5 +33,15 @@ public class ObjectsMovement : MonoBehaviour
     private void rotateObject()
     {
         gameObject.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+    }
+
+    void OnPauseGame()
+    {
+        paused = true;
+    }
+
+    void OnResumeGame()
+    {
+        paused = false;
     }
 }
