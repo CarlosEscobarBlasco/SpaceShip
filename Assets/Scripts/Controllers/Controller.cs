@@ -8,43 +8,37 @@ public class Controller : MonoBehaviour {
 
     public Camera mainCamera;
     public GameObject destroyer;
+
     private List<GameObject> ships;
     private GameObject player;
     private bool changePosition;
     private MenuController menuController;
+    private List<string> rivalShips;
 
     void Awake()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
-        createShips();
-        player = GameObject.FindGameObjectWithTag("Player");
-        try
-        {
-            ships = new List<GameObject>(GameObject.FindGameObjectsWithTag("CPU"));
-        }
-        catch (Exception)
-        {
-            ships = new List<GameObject>();
-        }
-        ships.Add(player);
-        
+        ships = new List<GameObject>();
+        createShips();       
     }
 
 	// Use this for initialization
 	void Start () {
-        setObjects();
-    }
-
-    private void setObjects()
-    {
         setPlayerToCamera();
     }
-	
+
+
 	// Update is called once per frame
-	void Update () {
-        sortArrayShips();
-        if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count-1]);
+	void Update ()
+	{
+	    sortArrayShips();
+	    setDestroyerToLastShip();
 	}
+
+    private void setDestroyerToLastShip()
+    {
+        if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count - 1]);
+    }
 
     private void setPlayerToCamera()
     {
@@ -101,22 +95,52 @@ public class Controller : MonoBehaviour {
         return player;
     }
 
-    private void createShips(){ //Hacer solo un prefab? y activar/desactivar CPU/Player y el tag?
-        GameObject ship;
-        ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getSelectedShip()), new Vector3(-2,-3.5f,0), transform.rotation) as GameObject;
+    public int getCollisionsOfPlayer()
+    {
+        return player.GetComponent<ShipStatistics>().getCollisions();
+    }
+
+    public string getTimeOfPlayer()
+    {
+        return trasnformTimeFormt(player.GetComponent<ShipStatistics>().getDuration());
+    }
+
+    private string trasnformTimeFormt(float time)
+    {
+        int min = (int)time/60;
+        float sec;
+        float.TryParse((time%60).ToString().Split('.')[0], out sec);
+        float milSec;
+        float.TryParse(time.ToString().Split('.')[1].Substring(0, 2),out milSec);
+        return (min>9?min.ToString():"0"+ min) + ":" + (sec>9?sec.ToString():"0"+sec) + ":" + (milSec>9?milSec.ToString():milSec+"0");
+    }
+
+    private void createShips(){
+        rivalShips = menuController.getRivalShips();
+        createPlayerShip(menuController.getSelectedShip(), new Vector3(-2, -3.5f, 0));
+        createRivalShip(rivalShips[0], new Vector3(2, -3.5f, 0));
+        createRivalShip(rivalShips[1], new Vector3(-0.75f, -3.5f, 0));
+        createRivalShip(rivalShips[2], new Vector3(0.75f, -3.5f, 0));
+    }
+
+    private void createPlayerShip(string name, Vector3 position)
+    {
+        GameObject ship = Instantiate(Resources.Load("Prefabs/Ships/" +name), position, transform.rotation) as GameObject;
         ship.GetComponent<KeyListener>().enabled = true;
+        ship.GetComponent<ShipStatistics>().startStatistics();
+        player = ship;
         ship.tag = "Player";
-        ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[0]), new Vector3(2,-3.5f,0), transform.rotation) as GameObject;
+        ships.Add(ship);
+    }
+
+    private void createRivalShip(string name, Vector3 position)
+    {
+        GameObject ship = Instantiate(Resources.Load("Prefabs/Ships/" + name), position, transform.rotation) as GameObject;
         ship.GetComponent<AIPlus>().enabled = true;
         ship.GetComponent<ArtificialIntelligence>().enabled = true;
+        ship.GetComponent<ArtificialIntelligence>().setDifficulty(menuController.getDifficulty());
+        ship.GetComponent<ShipStatistics>().startStatistics();      
         ship.tag = "CPU";
-        ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[1]), new Vector3(-0.75f,-3.5f,0), transform.rotation) as GameObject;
-        ship.GetComponent<AIPlus>().enabled = true;
-        ship.GetComponent<ArtificialIntelligence>().enabled = true;
-        ship.tag = "CPU";
-        ship = Instantiate(Resources.Load("Prefabs/Ships/" + menuController.getRivalShips()[2]), new Vector3(0.75f,-3.5f,0), transform.rotation) as GameObject;
-        ship.GetComponent<AIPlus>().enabled = true;
-        ship.GetComponent<ArtificialIntelligence>().enabled = true;
-        ship.tag = "CPU";
+        ships.Add(ship);
     }
 }

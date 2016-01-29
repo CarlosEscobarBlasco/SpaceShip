@@ -17,7 +17,7 @@ public class PowerUpController : MonoBehaviour
 	void Start ()
 	{
         player = GameObject.FindGameObjectWithTag("Player");
-        //Debug.Log(player);
+        //print(player);
 	    changePowerUp();
         disabledPowerUpButton();
 	}

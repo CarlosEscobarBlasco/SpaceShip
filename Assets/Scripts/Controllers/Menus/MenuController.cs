@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class MenuController : MonoBehaviour {
 
@@ -13,6 +15,7 @@ public class MenuController : MonoBehaviour {
     private string selectedShip;
     private List<string> rivalShips = new List<string>();
     private string selectedWorld;
+    private int difficulty;
 
 	// Use this for initialization
 	void Start () {
@@ -64,18 +67,26 @@ public class MenuController : MonoBehaviour {
         gameSelector.SetActive(true);
     }
 
-    private void startQuickRace()
+    public void startQuickRace()
     {
         Application.LoadLevel("Game");
+    }
+
+    public void returnMenu()
+    {
+        Application.LoadLevel("Menus");
+        Destroy(this.gameObject);
     }
 
     public void selectShip(string ship)
     {
         selectedShip = ship;
-        for (int i = 1; i <= 5; i++)
+        rivalShips.Clear();
+        for (int i = 1; i <= 6; i++)
         {
             if(selectedShip!="Ship"+i)rivalShips.Add("Ship"+i);
         }
+
         goToWorldSelectionMenu();
     }
 
@@ -86,28 +97,34 @@ public class MenuController : MonoBehaviour {
 
     public List<string> getRivalShips()
     {
-        shuffle(rivalShips);
-        return rivalShips;
+        return shuffle(rivalShips);
+       // return rivalShips;
     }
 
-    public static void shuffle(IList<string> list)  
+    public List<string>  shuffle(List<string> list)
     {
-        int n = list.Count;  
-        while (n > 1) {  
-            n--;
-            int k = Random.Range(n, list.Count);
-            string value = list[k];  
-            list[k] = list[n];  
-            list[n] = value;  
-        }  
+        for (int i = 0; i < list.Count; i++)
+        {
+            var n = Random.Range(0, list.Count - 1);
+            var aux = list[n];
+            var n2 = Random.Range(0, list.Count - 1);
+            list[n] = list[n2];
+            list[n2] = aux;
+        }
+        return list;
     }
 
     public void selectWorld(string world, int difficulty)
     {
         selectedWorld = world;
+        this.difficulty = difficulty;
         startQuickRace();
     }
 
+    public int getDifficulty()
+    {
+        return difficulty;
+    }
     public string getSelectedWorld()
     {
         return selectedWorld;

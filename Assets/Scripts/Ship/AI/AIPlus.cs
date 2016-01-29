@@ -5,12 +5,13 @@ using System;
 public class AIPlus : MonoBehaviour
 {
     private GameObject player;
-    private int distance;
+    public int distance;
 	// Use this for initialization
+    
 	void Start ()
 	{
 	    player = GameObject.FindGameObjectWithTag("Player");
-	    distance = 10;
+	    //distance = 10;
 	}
 	
 	// Update is called once per frame
@@ -23,6 +24,11 @@ public class AIPlus : MonoBehaviour
     private void setCollider(bool status)
     {
         gameObject.GetComponent<Collider2D>().enabled = status;
+    }
+
+    public void setDistance(int distance)
+    {
+        this.distance = distance;
     }
 
 }
