@@ -13,6 +13,7 @@ public class FinishController : MonoBehaviour
 
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
+
 	// Use this for initialization
 	void Start ()
 	{

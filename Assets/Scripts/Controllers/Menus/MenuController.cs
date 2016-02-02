@@ -73,9 +73,9 @@ public class MenuController : MonoBehaviour {
         gameSelector.SetActive(true);
     }
 
-    public void startQuickRace()
+    public void startQuickRace(string world)
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game "+ world);
     }
 
     public void returnMenu()
@@ -104,7 +104,6 @@ public class MenuController : MonoBehaviour {
     public List<string> getRivalShips()
     {
         return shuffle(rivalShips);
-       // return rivalShips;
     }
 
     public List<string>  shuffle(List<string> list)
@@ -124,7 +123,7 @@ public class MenuController : MonoBehaviour {
     {
         selectedWorld = world;
         this.difficulty = difficulty;
-        startQuickRace();
+        startQuickRace(world);
     }
 
     public int getDifficulty()

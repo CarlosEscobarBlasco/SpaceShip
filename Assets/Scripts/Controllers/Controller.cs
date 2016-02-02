@@ -16,26 +16,26 @@ public class Controller : MonoBehaviour {
     private bool changePosition;
     private MenuController menuController;
     private List<string> rivalShips;
-    private bool initialTime;
+   // private bool initialTime;
 
     void Awake()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         ships = new List<GameObject>();
         createShips();
-        initialTime = true;
+        //initialTime = true;
     }
 
 	// Use this for initialization
 	void Start () {
         setPlayerToCamera();
+        StartCoroutine(startBackCount());
     }
 
 
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (initialTime) StartCoroutine(startBackCount());
 	    sortArrayShips();
 	    setDestroyerToLastShip();
 	}
@@ -151,6 +151,7 @@ public class Controller : MonoBehaviour {
 
     private IEnumerator startBackCount()
     {
+        //initialTime = false;
         for (int i = 0; i < ships.Count; i++)
         {
             if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = false;
@@ -168,7 +169,7 @@ public class Controller : MonoBehaviour {
             if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = true;
             ships[i].GetComponent<ShipMovement>().enabled = true;
         }
-        initialTime = false;
+        //initialTime = false;
     }
 
 }

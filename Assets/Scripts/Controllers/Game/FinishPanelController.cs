@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class FinishPanelController : MonoBehaviour
@@ -35,7 +36,7 @@ public class FinishPanelController : MonoBehaviour
 
     public void playAgain()
     {
-        menuController.startQuickRace();
+       menuController.startQuickRace(EditorApplication.currentScene.Split(' ')[1].Split('.')[0]);
     }
 
     public void goToMainMenu()
