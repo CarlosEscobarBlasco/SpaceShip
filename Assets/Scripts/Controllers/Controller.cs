@@ -129,7 +129,8 @@ public class Controller : MonoBehaviour {
     private void createPlayerShip(string name, Vector3 position)
     {
         GameObject ship = Instantiate(Resources.Load("Prefabs/Ships/" +name), position, transform.rotation) as GameObject;
-        ship.GetComponent<KeyListener>().enabled = true;
+        if (SystemInfo.deviceType == DeviceType.Handheld) ship.GetComponent<TouchListener>().enabled = true;
+        else ship.GetComponent<KeyListener>().enabled = true;
         ship.GetComponent<ShipStatistics>().startStatistics();
         player = ship;
         ship.tag = "Player";
@@ -151,7 +152,8 @@ public class Controller : MonoBehaviour {
     {
         for (int i = 0; i < ships.Count; i++)
         {
-            if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = false;
+            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Handheld) ships[i].GetComponent<TouchListener>().enabled = false;
+            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = false;
             ships[i].GetComponent<ShipMovement>().enabled = false;
         }
         backCount.text = "3";
@@ -163,7 +165,8 @@ public class Controller : MonoBehaviour {
         backCount.text = "";
         for (int i = 0; i < ships.Count; i++)
         {
-            if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = true;
+            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Handheld) ships[i].GetComponent<TouchListener>().enabled = true;
+            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = true;
             ships[i].GetComponent<ShipMovement>().enabled = true;
         }
     }
