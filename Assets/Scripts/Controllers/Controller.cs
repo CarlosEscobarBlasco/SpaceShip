@@ -16,14 +16,12 @@ public class Controller : MonoBehaviour {
     private bool changePosition;
     private MenuController menuController;
     private List<string> rivalShips;
-   // private bool initialTime;
 
     void Awake()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         ships = new List<GameObject>();
         createShips();
-        //initialTime = true;
     }
 
 	// Use this for initialization
@@ -151,7 +149,6 @@ public class Controller : MonoBehaviour {
 
     private IEnumerator startBackCount()
     {
-        //initialTime = false;
         for (int i = 0; i < ships.Count; i++)
         {
             if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = false;
@@ -169,7 +166,6 @@ public class Controller : MonoBehaviour {
             if (ships[i].tag == "Player") ships[i].GetComponent<KeyListener>().enabled = true;
             ships[i].GetComponent<ShipMovement>().enabled = true;
         }
-        //initialTime = false;
     }
 
 }

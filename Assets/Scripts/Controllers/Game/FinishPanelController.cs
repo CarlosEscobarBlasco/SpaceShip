@@ -36,7 +36,7 @@ public class FinishPanelController : MonoBehaviour
 
     public void playAgain()
     {
-       menuController.startQuickRace(EditorApplication.currentScene.Split(' ')[1].Split('.')[0]);
+       menuController.startQuickRace(menuController.getSceneName());
     }
 
     public void goToMainMenu()

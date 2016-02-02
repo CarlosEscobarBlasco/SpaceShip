@@ -13,13 +13,16 @@ public class MenuController : MonoBehaviour {
     public GameObject shipsPanel;
     public GameObject gameSelector;
 
+    private string sceneName;
     private string selectedShip;
     private List<string> rivalShips = new List<string>();
     private string selectedWorld;
     private int difficulty;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+	    sceneName = "Menus";
         mainPanel.SetActive(true);
         shipsPanel.SetActive(false);
         worldsPanel.SetActive(false);
@@ -76,11 +79,13 @@ public class MenuController : MonoBehaviour {
     public void startQuickRace(string world)
     {
         SceneManager.LoadScene("Game "+ world);
+        sceneName = world;
     }
 
     public void returnMenu()
     {
         SceneManager.LoadScene("Menus");
+        sceneName = "Menus";
         Destroy(this.gameObject);
     }
 
@@ -130,9 +135,15 @@ public class MenuController : MonoBehaviour {
     {
         return difficulty;
     }
+
     public string getSelectedWorld()
     {
         return selectedWorld;
+    }
+
+    public string getSceneName()
+    {
+        return sceneName;
     }
 
 }
