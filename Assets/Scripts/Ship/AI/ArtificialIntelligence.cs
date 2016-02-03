@@ -81,17 +81,17 @@ public class ArtificialIntelligence : MonoBehaviour
 
     private bool centerCollision()
     {
-        return hitCenter.collider != null && hitCenter.collider.tag == "Obstacle";
+        return hitCenter.collider != null && (hitCenter.collider.tag == "Meteor" || hitCenter.collider.tag == "BlackHole");
     }
 
     private bool leftCollision()
     {
-        return hitLeft.collider != null && hitLeft.collider.tag == "Obstacle";
+        return hitLeft.collider != null && (hitLeft.collider.tag == "Meteor" || hitLeft.collider.tag == "BlackHole");
     }
 
     private bool rightCollision()
     {
-        return hitRight.collider != null && hitRight.collider.tag == "Obstacle";
+        return hitRight.collider != null && (hitRight.collider.tag == "Meteor"|| hitRight.collider.tag == "BlackHole");
     }
 
 
