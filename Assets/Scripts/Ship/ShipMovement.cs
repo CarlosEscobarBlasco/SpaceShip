@@ -87,18 +87,24 @@ public class ShipMovement : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Obstacle")
+        if (collider.tag == "Meteor")
         {
             if (!shield)
             {
                 collider.gameObject.GetComponent<MeteorDestroyer>().destroyMeteor();
-                //animacion roto
                 speedReductionByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
                 GetComponent<ShipStatistics>().increaseCollisionStatistic();
             }
             else shield = false;
 
+        }else if (collider.tag == "BlackHole")
+        {
+            
+        }else if (collider.tag == "SpeedUp")
+        {
+            //llamar a la funcion de acelerar
         }
+
     }
 
     public void noInput()
