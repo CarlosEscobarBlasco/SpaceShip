@@ -114,6 +114,24 @@ public class ShipMovement : MonoBehaviour {
 
     }
 
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "BlackHole")
+        {
+            if (forwardSpeed <= 0.5f) acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
+            else acceleration = gameObject.GetComponent<ShipData>().getAcceleration() *- 10;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.tag=="BlackHole")
+        {
+            acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
+            if (forwardSpeed <= 0) forwardSpeed = 0.5f;
+        }
+    }
+
     public void noInput()
     {
         transform.rotation = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
