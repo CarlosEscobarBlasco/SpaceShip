@@ -3,6 +3,11 @@ using System.Collections;
 
 public class ObjectsMovement : MonoBehaviour
 {
+
+    public float maxRotationSpeed;
+    public float minRotationSpeed;
+    public float minFallSpeed;
+    public float maxFallSpeed;
     private float rotationSpeed;
     private float fallSpeed;
     private bool paused;
@@ -11,12 +16,16 @@ public class ObjectsMovement : MonoBehaviour
 	void Start ()
 	{
 	    paused = false;
-	    rotationSpeed = Random.Range(-30, 30);
+	    rotationSpeed = Random.Range(minRotationSpeed, maxRotationSpeed);
+	    fallSpeed = Random.Range(minFallSpeed, maxFallSpeed);
+
+        /*rotationSpeed = Random.Range(-30, 30);
 	    fallSpeed = Random.Range(0f, 0.025f);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        */
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 	    if (!paused)
 	    {
