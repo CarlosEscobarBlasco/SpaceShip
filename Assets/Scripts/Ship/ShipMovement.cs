@@ -82,6 +82,7 @@ public class ShipMovement : MonoBehaviour {
     private void speedIncreaseByPercentage(float amount)
     {
         if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += amount;
+        else forwardSpeed += amount/2;
     }
 
     private bool insideBounds(bool right)

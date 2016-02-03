@@ -40,7 +40,7 @@ public class PauseController : MonoBehaviour
 
     public void resumeGame()
     {
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Meteor");
         foreach (GameObject go in objects)
         {
             go.SendMessage("OnResumeGame", SendMessageOptions.DontRequireReceiver);
@@ -54,7 +54,7 @@ public class PauseController : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         spawner.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Meteor");
         foreach (GameObject go in objects)
         {
             go.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
