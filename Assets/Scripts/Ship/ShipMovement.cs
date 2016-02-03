@@ -79,6 +79,13 @@ public class ShipMovement : MonoBehaviour {
         if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
+    private void speedIncreaseByPercentage(float percentage)
+    {
+        print("Antes " + forwardSpeed);
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += (forwardSpeed * percentage) / 100;
+        print("Despues " + forwardSpeed);
+    }
+
     private bool insideBounds(bool right)
     {
         if (right ? transform.position.x < 2.4f : transform.position.x > -2.4f ) return true;
@@ -100,9 +107,9 @@ public class ShipMovement : MonoBehaviour {
         }else if (collider.tag == "BlackHole")
         {
             
-        }else if (collider.tag == "SpeedUp")
+        }else if (collider.tag == "TurboSpeed")
         {
-            //llamar a la funcion de acelerar
+            speedIncreaseByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
         }
 
     }
