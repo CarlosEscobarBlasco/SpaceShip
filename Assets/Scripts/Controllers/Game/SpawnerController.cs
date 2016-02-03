@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class SpawnerController : MonoBehaviour {
+
     public GameObject[] objectsToSpawn;
     private GameObject objectToSpawn;
     public int speed = 0;
