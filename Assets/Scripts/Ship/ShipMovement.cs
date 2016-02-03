@@ -70,7 +70,7 @@ public class ShipMovement : MonoBehaviour {
 
     private void ChangeSpeed()
     {
-        if (forwardSpeed < maxSpeed && forwardSpeed > 0)forwardSpeed += acceleration;
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += acceleration;
     }
 
     private void speedReductionByPercentage(float percentage)
@@ -79,11 +79,9 @@ public class ShipMovement : MonoBehaviour {
         if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
-    private void speedIncreaseByPercentage(float percentage)
+    private void speedIncreaseByPercentage(float amount)
     {
-        print("Antes " + forwardSpeed);
-        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += (forwardSpeed * percentage) / 100;
-        print("Despues " + forwardSpeed);
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += amount;
     }
 
     private bool insideBounds(bool right)
@@ -103,10 +101,6 @@ public class ShipMovement : MonoBehaviour {
                 GetComponent<ShipStatistics>().increaseCollisionStatistic();
             }
             else shield = false;
-
-        }else if (collider.tag == "BlackHole")
-        {
-            
         }else if (collider.tag == "TurboSpeed")
         {
             speedIncreaseByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
