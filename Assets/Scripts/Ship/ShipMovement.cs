@@ -113,8 +113,8 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag == "BlackHole")
         {
-            if (forwardSpeed <= 1f) acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
-            else acceleration = gameObject.GetComponent<ShipData>().getAcceleration() * -5 * forwardSpeed;
+            if (forwardSpeed <= collider.GetComponent<BlackHole>().getMinSpeedInside()) acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
+            else acceleration = gameObject.GetComponent<ShipData>().getAcceleration() * -collider.GetComponent<BlackHole>().getSlowAmount() * forwardSpeed;
         }
     }
 
