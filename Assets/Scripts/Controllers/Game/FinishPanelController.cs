@@ -42,4 +42,9 @@ public class FinishPanelController : MonoBehaviour
     {
         menuController.returnMenu();
     }
+
+    public void goToSelectWorld()
+    {
+        menuController.returnWorldSelectionMenu();
+    }
 }

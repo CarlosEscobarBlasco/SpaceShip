@@ -160,4 +160,15 @@ public class MenuController : MonoBehaviour {
     {
         return sceneName;
     }
+
+    public void returnWorldSelectionMenu()
+    {
+        SceneManager.LoadScene("Menus");
+        sceneName = "Menus";
+        //print(GameObject.FindGameObjectsWithTag("MenuController").Length);
+        //MenuController controller = GameObject.FindGameObjectsWithTag("MenuController")[1].GetComponent<MenuController>();
+        //print(controller.gameObject);
+        //controller.goToWorldSelectionMenu();
+        Destroy(this.gameObject);
+    }
 }

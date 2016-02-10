@@ -32,6 +32,11 @@ public class InstructionNavigator : MonoBehaviour {
     {
         panels[index].SetActive(false);
         index++;
+        if (index == panels.Length)
+        {
+            init();
+            menuController.goToGameSelector();
+        }
         panels[index].SetActive(true);
     }
 
@@ -42,7 +47,7 @@ public class InstructionNavigator : MonoBehaviour {
         if (index == -1)
         {
             init();
-            menuController.goToMainMenu();
+            menuController.goToGameSelector();
         }
         else panels[index].SetActive(true);
     }
