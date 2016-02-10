@@ -12,6 +12,7 @@ public class MenuController : MonoBehaviour {
     public GameObject worldsPanel;
     public GameObject shipsPanel;
     public GameObject gameSelector;
+    public GameObject instructions;
 
     private string sceneName;
     private string selectedShip;
@@ -26,6 +27,7 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(true);
         shipsPanel.SetActive(false);
         worldsPanel.SetActive(false);
+        instructions.SetActive(false);
         DontDestroyOnLoad(transform.gameObject);
 	}
 	
@@ -50,6 +52,7 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(false);
         worldsPanel.SetActive(true);
         gameSelector.SetActive(false);
+        instructions.SetActive(false);
     }
 
     public void goToShipSelectionMenu()
@@ -58,6 +61,7 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
         gameSelector.SetActive(false);
+        instructions.SetActive(false);
     }
 
     public void goToMainMenu()
@@ -66,6 +70,7 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
         gameSelector.SetActive(false);
+        instructions.SetActive(false);
     }
 
     public void goToGameSelector()
@@ -74,6 +79,16 @@ public class MenuController : MonoBehaviour {
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
         gameSelector.SetActive(true);
+        instructions.SetActive(false);
+    }
+
+    public void goToInstructions()
+    {
+        shipsPanel.SetActive(false);
+        mainPanel.SetActive(false);
+        worldsPanel.SetActive(false);
+        gameSelector.SetActive(false);
+        instructions.SetActive(true);
     }
 
     public void startQuickRace(string world)
@@ -145,5 +160,4 @@ public class MenuController : MonoBehaviour {
     {
         return sceneName;
     }
-
 }
