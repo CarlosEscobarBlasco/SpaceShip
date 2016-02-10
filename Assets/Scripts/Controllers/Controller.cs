@@ -10,6 +10,7 @@ public class Controller : MonoBehaviour {
     public GameObject destroyer;
     public PauseController PauseController;
     public Text backCount;
+    public GameObject pointer;
 
     private List<GameObject> ships;
     private GameObject player;
@@ -150,6 +151,7 @@ public class Controller : MonoBehaviour {
 
     private IEnumerator startBackCount()
     {
+        pointer.SetActive(true);
         for (int i = 0; i < ships.Count; i++)
         {
             if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Handheld) ships[i].GetComponent<TouchListener>().enabled = false;
@@ -157,11 +159,20 @@ public class Controller : MonoBehaviour {
             ships[i].GetComponent<ShipMovement>().enabled = false;
         }
         backCount.text = "3";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = true;
         backCount.text = "2";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = true;
         backCount.text = "1";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        pointer.GetComponentInChildren<Image>().enabled = true;
         backCount.text = "";
         for (int i = 0; i < ships.Count; i++)
         {
@@ -169,6 +180,7 @@ public class Controller : MonoBehaviour {
             if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = true;
             ships[i].GetComponent<ShipMovement>().enabled = true;
         }
+        pointer.SetActive(false);
     }
 
 }
