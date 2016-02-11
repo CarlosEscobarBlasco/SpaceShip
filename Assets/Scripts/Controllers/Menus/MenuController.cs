@@ -15,10 +15,17 @@ public class MenuController : MonoBehaviour {
     public GameObject instructions;
 
     private string sceneName;
-    private string selectedShip;
-    private List<string> rivalShips = new List<string>();
+    private static string selectedShip;
+    private static List<string> rivalShips = new List<string>();
     private string selectedWorld;
     private int difficulty;
+    private static bool changeWorld;
+
+    void Awake()
+    {
+        //changeWorld = false;
+        print(changeWorld);
+    }
 
 	// Use this for initialization
 	void Start ()
@@ -29,10 +36,12 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         instructions.SetActive(false);
         DontDestroyOnLoad(transform.gameObject);
+	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (changeWorld) goToWorldSelectionMenu();
 	    if(Input.GetKeyDown(KeyCode.Escape)){
             if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
@@ -94,6 +103,7 @@ public class MenuController : MonoBehaviour {
     public void startQuickRace(string world)
     {
         SceneManager.LoadScene("Game "+ world);
+        changeWorld = false;
         sceneName = world;
     }
 
@@ -101,6 +111,7 @@ public class MenuController : MonoBehaviour {
     {
         SceneManager.LoadScene("Menus");
         sceneName = "Menus";
+        changeWorld = false;
         Destroy(this.gameObject);
     }
 
@@ -165,10 +176,7 @@ public class MenuController : MonoBehaviour {
     {
         SceneManager.LoadScene("Menus");
         sceneName = "Menus";
-        //print(GameObject.FindGameObjectsWithTag("MenuController").Length);
-        //MenuController controller = GameObject.FindGameObjectsWithTag("MenuController")[1].GetComponent<MenuController>();
-        //print(controller.gameObject);
-        //controller.goToWorldSelectionMenu();
+        changeWorld = true;
         Destroy(this.gameObject);
     }
 }
