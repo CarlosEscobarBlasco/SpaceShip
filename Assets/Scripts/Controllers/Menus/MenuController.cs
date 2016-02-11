@@ -24,7 +24,6 @@ public class MenuController : MonoBehaviour {
     void Awake()
     {
         //changeWorld = false;
-        print(changeWorld);
     }
 
 	// Use this for initialization
