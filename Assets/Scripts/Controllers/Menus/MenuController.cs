@@ -35,7 +35,6 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         instructions.SetActive(false);
         DontDestroyOnLoad(transform.gameObject);
-	    
 	}
 	
 	// Update is called once per frame
