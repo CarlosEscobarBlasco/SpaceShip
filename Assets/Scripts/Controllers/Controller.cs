@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class Controller : MonoBehaviour {
     private bool changePosition;
     private MenuController menuController;
     private List<string> rivalShips;
+    private AudioController audioController;
 
     void Awake()
     {
@@ -28,6 +30,7 @@ public class Controller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         setPlayerToCamera();
+	    audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
         StartCoroutine(startBackCount());
     }
 
@@ -158,21 +161,35 @@ public class Controller : MonoBehaviour {
             if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = false;
             ships[i].GetComponent<ShipMovement>().enabled = false;
         }
+        audioController.playCountDownSound();
         backCount.text = "3";
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = true;
+        audioController.playCountDownSound();
         backCount.text = "2";
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = true;
+        audioController.playCountDownSound();
         backCount.text = "1";
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         pointer.GetComponentInChildren<Image>().enabled = true;
+        audioController.playStartSound();
+        yield return new WaitForSeconds(0.5f);
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game Earth": audioController.playWorldMusic(0);
+                break;
+            case "Game Mars": audioController.playWorldMusic(1);
+                break;
+            case "Game Saturn": audioController.playWorldMusic(2);
+                break;
+        }
         backCount.text = "";
         for (int i = 0; i < ships.Count; i++)
         {

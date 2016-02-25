@@ -10,8 +10,9 @@ public class AudioController : MonoBehaviour {
     public AudioSource effectsAudioSource;
     public AudioClip buttonClip;
     public AudioClip countDownClip;
+    public AudioClip startClip;
     public AudioClip finishClip;
-    
+    public AudioClip turboClip;
     
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,14 @@ public class AudioController : MonoBehaviour {
 
     public void playCountDownSound()
     {
+        musicAudioSource.Stop();
         effectsAudioSource.clip = countDownClip;
+        effectsAudioSource.Play();
+    }
+
+    public void playStartSound()
+    {
+        effectsAudioSource.clip = startClip;
         effectsAudioSource.Play();
     }
 

@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour {
     private string selectedWorld;
     private int difficulty;
     private static bool changeWorld;
+    private AudioController audioController;
 
     void Awake()
     {
@@ -34,6 +35,8 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         worldsPanel.SetActive(false);
         instructions.SetActive(false);
+	    audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
+        audioController.playMainMenuMusic();
         DontDestroyOnLoad(transform.gameObject);
 	}
 	
@@ -44,6 +47,7 @@ public class MenuController : MonoBehaviour {
             if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
             else if(gameSelector.activeSelf) goToMainMenu();
+            else if(instructions.activeSelf) goToMainMenu();
             else if(mainPanel.activeSelf) exitApp();
         }
 	}
@@ -55,6 +59,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToWorldSelectionMenu()
     {
+        audioController.playButtonSound();
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(true);
@@ -64,6 +69,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToShipSelectionMenu()
     {
+        audioController.playButtonSound();
         shipsPanel.SetActive(true);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
@@ -73,6 +79,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToMainMenu()
     {
+        audioController.playButtonSound();
         shipsPanel.SetActive(false);
         mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
@@ -82,6 +89,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToGameSelector()
     {
+        audioController.playButtonSound();
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
@@ -91,6 +99,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToInstructions()
     {
+        audioController.playButtonSound();
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
@@ -107,6 +116,7 @@ public class MenuController : MonoBehaviour {
 
     public void returnMenu()
     {
+        Destroy(audioController.gameObject);
         SceneManager.LoadScene("Menus");
         sceneName = "Menus";
         changeWorld = false;
