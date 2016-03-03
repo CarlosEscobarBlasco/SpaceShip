@@ -92,6 +92,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
         if (prevButton)
             prevButton.GetComponent<Button>().onClick.AddListener(() => { PreviousScreen(); });
+        prevButton.SetActive(false);
 	}
 
     //------------------------------------------------------------------------
@@ -178,6 +179,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
+        if (aPageIndex == 0) prevButton.SetActive(false);
+        else if (aPageIndex == _pageCount-1) nextButton.SetActive(false);
+        else
+        {
+            prevButton.SetActive(true);
+            nextButton.SetActive(true);
+        }
         if (worldMenusliderController) worldMenusliderController.refreshValues(aPageIndex + 1);
         else shipMenusliderController.refreshValues(aPageIndex + 1);
     }

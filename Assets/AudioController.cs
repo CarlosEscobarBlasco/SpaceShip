@@ -57,10 +57,10 @@ public class AudioController : MonoBehaviour {
         musicAudioSource.volume = 0.0f;
     }
 
-    public void restoreBlackHole()
+    public void restoreMusicSound()
     {
-        effectsAudioSource.volume = 1.0f;
-        musicAudioSource.volume = 1.0f;
+        effectsAudioSource.volume = 0.05f;
+        musicAudioSource.volume = 0.05f;
     }
 
     public void playMainMenuMusic()
@@ -73,5 +73,11 @@ public class AudioController : MonoBehaviour {
     {
         musicAudioSource.clip = worldsMusic[world];
         musicAudioSource.Play();
+    }
+
+    public void playTurboSound()
+    {
+        effectsAudioSource.clip = turboClip;
+        effectsAudioSource.Play();
     }
 }

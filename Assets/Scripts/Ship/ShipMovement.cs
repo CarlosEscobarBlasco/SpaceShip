@@ -12,6 +12,7 @@ public class ShipMovement : MonoBehaviour {
     private float acceleration;
     private float maxSpeed;
     private bool shield;
+    private AudioController audioController;
 
     // Use this for initialization
     void Start ()
@@ -20,6 +21,7 @@ public class ShipMovement : MonoBehaviour {
         lateralSpeed = gameObject.GetComponent<ShipData>().getLateralSpeeed();
         acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
         maxSpeed= gameObject.GetComponent<ShipData>().getMaxSpeed();
+        audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
         shield = false;
     }
 	
@@ -104,6 +106,7 @@ public class ShipMovement : MonoBehaviour {
             else shield = false;
         }else if (collider.tag == "TurboSpeed")
         {
+            audioController.playTurboSound();
             speedIncreaseByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
         }
 
@@ -113,6 +116,7 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag == "BlackHole")
         {
+            if (collider.tag == "Player") audioController.playBlackHoleSound();
             if (forwardSpeed <= collider.GetComponent<BlackHole>().getMinSpeedInside()) acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
             else acceleration = gameObject.GetComponent<ShipData>().getAcceleration() * -collider.GetComponent<BlackHole>().getSlowAmount() * forwardSpeed;
         }
@@ -122,6 +126,7 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag=="BlackHole")
         {
+            if (collider.tag == "Player")audioController.restoreMusicSound();
             acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
             if (forwardSpeed <= 0) forwardSpeed = 0.5f;
         }

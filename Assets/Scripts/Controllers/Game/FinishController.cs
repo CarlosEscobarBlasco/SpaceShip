@@ -11,15 +11,18 @@ public class FinishController : MonoBehaviour
     public Text finalPosition;
     public FinishPanelController finalPanel;
 
+
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
+    private AudioController audioController;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
 	{
 	    controller = gameController.GetComponent<Controller>();
 	    finishSliderController.setDistance(this.transform.position.y);
-	}
+        audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,6 +41,7 @@ public class FinishController : MonoBehaviour
             collider.gameObject.GetComponent<ShipStatistics>().stopStatistics();
             if (collider.tag == "Player")
             {
+                audioController.playFinishSound();
                 showPosition(collider.gameObject);
                 finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
                 Invoke("showFinalPanel",2);
