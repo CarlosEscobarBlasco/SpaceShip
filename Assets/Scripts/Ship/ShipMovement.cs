@@ -116,7 +116,7 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag == "BlackHole")
         {
-            if (collider.tag == "Player") audioController.playBlackHoleSound();
+            if (gameObject.tag == "Player") { audioController.playBlackHoleSound();}
             if (forwardSpeed <= collider.GetComponent<BlackHole>().getMinSpeedInside()) acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
             else acceleration = gameObject.GetComponent<ShipData>().getAcceleration() * -collider.GetComponent<BlackHole>().getSlowAmount() * forwardSpeed;
         }
@@ -126,7 +126,7 @@ public class ShipMovement : MonoBehaviour {
     {
         if (collider.tag=="BlackHole")
         {
-            if (collider.tag == "Player")audioController.restoreMusicSound();
+            if (gameObject.tag == "Player")audioController.restoreMusicSound();
             acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
             if (forwardSpeed <= 0) forwardSpeed = 0.5f;
         }

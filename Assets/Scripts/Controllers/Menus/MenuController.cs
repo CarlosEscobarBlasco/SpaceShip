@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour {
     public GameObject shipsPanel;
     public GameObject gameSelector;
     public GameObject instructions;
+    public GameObject credits;
 
     private string sceneName;
     private static string selectedShip;
@@ -65,6 +66,7 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(true);
         gameSelector.SetActive(false);
         instructions.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void goToShipSelectionMenu()
@@ -75,6 +77,7 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         gameSelector.SetActive(false);
         instructions.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void goToMainMenu()
@@ -85,6 +88,7 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         gameSelector.SetActive(false);
         instructions.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void goToGameSelector()
@@ -95,6 +99,7 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         gameSelector.SetActive(true);
         instructions.SetActive(false);
+        credits.SetActive(false);
     }
 
     public void goToInstructions()
@@ -105,6 +110,18 @@ public class MenuController : MonoBehaviour {
         worldsPanel.SetActive(false);
         gameSelector.SetActive(false);
         instructions.SetActive(true);
+        credits.SetActive(false);
+    }
+
+    public void goToCredits()
+    {
+        audioController.playButtonSound();
+        shipsPanel.SetActive(false);
+        mainPanel.SetActive(false);
+        worldsPanel.SetActive(false);
+        gameSelector.SetActive(false);
+        instructions.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void startQuickRace(string world)

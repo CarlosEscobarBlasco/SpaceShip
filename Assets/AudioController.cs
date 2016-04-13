@@ -59,8 +59,8 @@ public class AudioController : MonoBehaviour {
 
     public void restoreMusicSound()
     {
-        effectsAudioSource.volume = 0.05f;
-        musicAudioSource.volume = 0.05f;
+        effectsAudioSource.volume = 0.5f;
+        musicAudioSource.volume = 0.5f;
     }
 
     public void playMainMenuMusic()
