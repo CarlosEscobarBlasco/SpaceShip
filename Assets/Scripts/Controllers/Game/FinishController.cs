@@ -11,15 +11,16 @@ public class FinishController : MonoBehaviour
     public Text finalPosition;
     public FinishPanelController finalPanel;
 
-
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
     private AudioController audioController;
+    private FileController fileController;
 
     // Use this for initialization
     void Start ()
 	{
-	    controller = gameController.GetComponent<Controller>();
+        fileController = GameObject.FindGameObjectWithTag("FileController").GetComponent<FileController>();
+        controller = gameController.GetComponent<Controller>();
 	    finishSliderController.setDistance(this.transform.position.y);
         audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
     }
@@ -45,6 +46,7 @@ public class FinishController : MonoBehaviour
                 showPosition(collider.gameObject);
                 finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
                 Invoke("showFinalPanel",2);
+                if (controller.GetComponent<Controller>().positionOf(collider.gameObject)==1) unlocker();
             }
         }else if (collider.tag == "Spawner")
         {
@@ -67,5 +69,18 @@ public class FinishController : MonoBehaviour
     void showFinalPanel()
     {
         finalPanel.show();
+    }
+
+    void unlocker()
+    {
+        if (controller.getSelectedWorld().Equals(fileController.getLastUnlockedWorldName()) && fileController.getNWorld() < 2)
+        {
+            fileController.writeUnlockeables(fileController.getNShip(), fileController.getNWorld() + 1);
+        }
+        if (controller.getDifficulty() == 3 && fileController.isWorldPassedInHard(controller.getSelectedWorld()))
+        {
+            fileController.writeUnlockeables(fileController.getNShip() + 1, fileController.getNWorld());
+            fileController.writeHardWorldPassed(controller.getSelectedWorld());
+        }
     }
 }

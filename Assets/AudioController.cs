@@ -53,8 +53,8 @@ public class AudioController : MonoBehaviour {
 
     public void playBlackHoleSound()
     {
-        effectsAudioSource.volume = 0.0f;
-        musicAudioSource.volume = 0.0f;
+        effectsAudioSource.volume = 0.05f;
+        musicAudioSource.volume = 0.05f;
     }
 
     public void restoreMusicSound()

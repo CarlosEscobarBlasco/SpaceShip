@@ -61,6 +61,11 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     public WorldMenuSlidersController worldMenusliderController;
     public ShipMenuSlidersController shipMenusliderController;
+    public Button selectShipButton;
+    public Button selectWorldEasyButton;
+    public Button selectWorldMedButton;
+    public Button selectWorldHardButton;
+    public FileController fileController;
     //------------------------------------------------------------------------
     void Start() {
         _scrollRectComponent = GetComponent<ScrollRect>();
@@ -179,6 +184,20 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
+        if (!worldMenusliderController && _currentPage > fileController.getNShip()) selectShipButton.interactable = false;
+        else if (!worldMenusliderController) selectShipButton.interactable = true;
+        if (worldMenusliderController && _currentPage > fileController.getNWorld())
+        {
+            selectWorldEasyButton.interactable = false;
+            selectWorldMedButton.interactable = false;
+            selectWorldHardButton.interactable = false;
+        }
+        else if (worldMenusliderController)
+        {
+            selectWorldEasyButton.interactable = true;
+            selectWorldMedButton.interactable = true;
+            selectWorldHardButton.interactable = true;
+        }
         if (aPageIndex == 0) prevButton.SetActive(false);
         else if (aPageIndex == _pageCount-1) nextButton.SetActive(false);
         else

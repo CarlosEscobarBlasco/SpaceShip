@@ -20,11 +20,16 @@ public class Controller : MonoBehaviour {
     private List<string> rivalShips;
     private AudioController audioController;
 
+    private string selectedWorld;
+    private int difficulty;
+
     void Awake()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         ships = new List<GameObject>();
         createShips();
+        selectedWorld = menuController.getSelectedWorld();
+        difficulty = menuController.getDifficulty();
     }
 
 	// Use this for initialization
@@ -198,6 +203,16 @@ public class Controller : MonoBehaviour {
             ships[i].GetComponent<ShipMovement>().enabled = true;
         }
         pointer.SetActive(false);
+    }
+
+    public int getDifficulty()
+    {
+        return difficulty;
+    }
+
+    public string getSelectedWorld()
+    {
+        return selectedWorld;
     }
 
 }
