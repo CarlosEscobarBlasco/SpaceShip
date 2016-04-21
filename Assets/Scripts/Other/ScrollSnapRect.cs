@@ -66,6 +66,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public Button selectWorldMedButton;
     public Button selectWorldHardButton;
     public FileController fileController;
+    public GameObject shipMessage;
+    public GameObject planetMessage;
     //------------------------------------------------------------------------
     void Start() {
         _scrollRectComponent = GetComponent<ScrollRect>();
@@ -184,19 +186,29 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
-        if (!worldMenusliderController && _currentPage > fileController.getNShip()) selectShipButton.interactable = false;
-        else if (!worldMenusliderController) selectShipButton.interactable = true;
+        if (!worldMenusliderController && _currentPage > fileController.getNShip())
+        {
+            selectShipButton.interactable = false;
+            shipMessage.SetActive(true);
+        }
+        else if (!worldMenusliderController)
+        {
+            selectShipButton.interactable = true;
+            shipMessage.SetActive(false);
+        }
         if (worldMenusliderController && _currentPage > fileController.getNWorld())
         {
             selectWorldEasyButton.interactable = false;
             selectWorldMedButton.interactable = false;
             selectWorldHardButton.interactable = false;
+            planetMessage.SetActive(true);
         }
         else if (worldMenusliderController)
         {
             selectWorldEasyButton.interactable = true;
             selectWorldMedButton.interactable = true;
             selectWorldHardButton.interactable = true;
+            planetMessage.SetActive(false);
         }
         if (aPageIndex == 0) prevButton.SetActive(false);
         else if (aPageIndex == _pageCount-1) nextButton.SetActive(false);
