@@ -16,6 +16,7 @@ public class AudioController : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
+        if(GameObject.FindGameObjectsWithTag(this.gameObject.tag).Length > 1) Destroy(this.gameObject);
         DontDestroyOnLoad(transform.gameObject);
         musicAudioSource.clip = mainMusic;
         musicAudioSource.Play();
@@ -53,14 +54,14 @@ public class AudioController : MonoBehaviour {
 
     public void playBlackHoleSound()
     {
-        effectsAudioSource.volume = 0.05f;
-        musicAudioSource.volume = 0.05f;
+        effectsAudioSource.volume = 0.1f;
+        musicAudioSource.volume = 0.1f;
     }
 
     public void restoreMusicSound()
     {
-        effectsAudioSource.volume = 0.5f;
-        musicAudioSource.volume = 0.5f;
+        effectsAudioSource.volume = 0.3f;
+        musicAudioSource.volume = 0.3f;
     }
 
     public void playMainMenuMusic()

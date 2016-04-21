@@ -15,6 +15,7 @@ public class FileController : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1) Destroy(gameObject);
         DontDestroyOnLoad(transform.gameObject);
         filePath = Application.persistentDataPath + "/unlockeables.txt";
         loadUnlockeables();

@@ -51,7 +51,7 @@ public class FinishController : MonoBehaviour
         }else if (collider.tag == "Spawner")
         {
             spawner = collider.gameObject;
-            Invoke("destroySpawner",1);
+            Invoke("destroySpawner",2.5f);
         }
     }
 
