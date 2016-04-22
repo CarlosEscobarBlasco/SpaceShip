@@ -11,7 +11,7 @@ public class MenuSpawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-         StartCoroutine(spawnController(starPrefab, 0.4f));
+         StartCoroutine(spawnController(starPrefab, 0.2f));
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class MenuSpawner : MonoBehaviour
     {
         starSpawned = Instantiate(objectToSpawn, randomPosition(objectToSpawn), objectToSpawn.transform.rotation) as GameObject;
         starSpawned.transform.SetParent(stars.transform);
-        starSpawned.transform.localScale = new Vector3(16,16,1);
+        starSpawned.transform.localScale = new Vector3(10,10,1);
     }
 
     Vector3 randomPosition(GameObject objectToSpawn)
