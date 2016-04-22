@@ -38,7 +38,6 @@ public class FinishController : MonoBehaviour
     {
         if (collider.tag == "CPU" || collider.tag == "Player")
         {
-            collider.gameObject.GetComponent<ShipMovement>().stopShip();
             collider.gameObject.GetComponent<ShipStatistics>().stopStatistics();
             if (collider.tag == "Player")
             {
