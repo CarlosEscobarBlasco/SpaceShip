@@ -95,9 +95,9 @@ public class MenuController : MonoBehaviour {
     {
         audioController.playButtonSound();
         shipsPanel.SetActive(false);
-        mainPanel.SetActive(false);
+        mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(true);
+        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
     }

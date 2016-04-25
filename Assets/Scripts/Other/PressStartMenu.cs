@@ -14,7 +14,7 @@ public class PressStartMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-        if (checkInput()) menuController.goToGameSelector();
+        if (checkInput()) menuController.goToShipSelectionMenu();
 	}
 
     private static bool checkInput()
