@@ -106,7 +106,7 @@ public class ShipMovement : MonoBehaviour {
             else shield = false;
         }else if (collider.tag == "TurboSpeed")
         {
-            audioController.playTurboSound();
+            //audioController.playTurboSound();
             speedIncreaseByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
         }
 

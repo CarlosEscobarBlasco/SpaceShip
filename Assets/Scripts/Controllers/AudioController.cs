@@ -12,7 +12,7 @@ public class AudioController : MonoBehaviour {
     public AudioClip countDownClip;
     public AudioClip startClip;
     public AudioClip finishClip;
-    public AudioClip turboClip;
+    //public AudioClip turboClip;
     
 	// Use this for initialization
 	void Start () {
@@ -54,14 +54,14 @@ public class AudioController : MonoBehaviour {
 
     public void playBlackHoleSound()
     {
-        effectsAudioSource.volume = 0.1f;
-        musicAudioSource.volume = 0.1f;
+        effectsAudioSource.volume = 0.3f;
+        musicAudioSource.volume = 0.3f;
     }
 
     public void restoreMusicSound()
     {
-        effectsAudioSource.volume = 0.3f;
-        musicAudioSource.volume = 0.3f;
+        effectsAudioSource.volume = 1f;
+        musicAudioSource.volume = 1f;
     }
 
     public void playMainMenuMusic()
@@ -76,9 +76,4 @@ public class AudioController : MonoBehaviour {
         musicAudioSource.Play();
     }
 
-    public void playTurboSound()
-    {
-        effectsAudioSource.clip = turboClip;
-        effectsAudioSource.Play();
-    }
 }
