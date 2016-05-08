@@ -24,9 +24,7 @@ public class AIPlus : MonoBehaviour
 
     private void boost(bool status)
     {
-        print("original: "+ originalMaxSpeed);
-        print("actual: "+ gameObject.GetComponent<ShipMovement>().getMaxSpeed());
-        gameObject.GetComponent<ShipMovement>().setMaxSpeed(status ? 0 : originalMaxSpeed);
+        gameObject.GetComponent<ShipMovement>().setMaxSpeed(status ? originalMaxSpeed * SPEED_REDUCER : originalMaxSpeed);
         gameObject.GetComponent<Collider2D>().enabled = !status;
     }
 
