@@ -4,26 +4,30 @@ using System;
 
 public class AIPlus : MonoBehaviour
 {
+    private const float SPEED_REDUCER = 0.7f;
     private GameObject player;
     public int distance;
-	// Use this for initialization
-    
+    private float originalMaxSpeed;
+
+	// Use this for initialization   
 	void Start ()
 	{
 	    player = GameObject.FindGameObjectWithTag("Player");
-	    //distance = 10;
+	    originalMaxSpeed = gameObject.GetComponent<ShipMovement>().getMaxSpeed();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (player.transform.position.y > gameObject.transform.position.y + distance) setCollider(false);
-        else setCollider(true);
+	    boost(player.transform.position.y > gameObject.transform.position.y + distance);
 	}
 
-    private void setCollider(bool status)
+    private void boost(bool status)
     {
-        gameObject.GetComponent<Collider2D>().enabled = status;
+        print("original: "+ originalMaxSpeed);
+        print("actual: "+ gameObject.GetComponent<ShipMovement>().getMaxSpeed());
+        gameObject.GetComponent<ShipMovement>().setMaxSpeed(status ? 0 : originalMaxSpeed);
+        gameObject.GetComponent<Collider2D>().enabled = !status;
     }
 
     public void setDistance(int distance)

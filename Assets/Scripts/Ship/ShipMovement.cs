@@ -14,13 +14,17 @@ public class ShipMovement : MonoBehaviour {
     private bool shield;
     private AudioController audioController;
 
-    // Use this for initialization
-    void Start ()
+    void Awake()
     {
         forwardSpeed = gameObject.GetComponent<ShipData>().getForwardSpeed();
         lateralSpeed = gameObject.GetComponent<ShipData>().getLateralSpeeed();
         acceleration = gameObject.GetComponent<ShipData>().getAcceleration();
-        maxSpeed= gameObject.GetComponent<ShipData>().getMaxSpeed();
+        maxSpeed = gameObject.GetComponent<ShipData>().getMaxSpeed();
+    }
+
+    // Use this for initialization
+    void Start ()
+    {
         audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
         shield = false;
     }
@@ -106,7 +110,6 @@ public class ShipMovement : MonoBehaviour {
             else shield = false;
         }else if (collider.tag == "TurboSpeed")
         {
-            //audioController.playTurboSound();
             speedIncreaseByPercentage(collider.gameObject.GetComponent<CollisionData>().getSlowAmountPercentage());
         }
 
@@ -150,6 +153,11 @@ public class ShipMovement : MonoBehaviour {
     public float getMaxSpeed()
     {
         return maxSpeed;
+    }
+
+    public void setMaxSpeed(float maxSpeed)
+    {
+        this.maxSpeed = maxSpeed;
     }
 
     public void stopShip()
