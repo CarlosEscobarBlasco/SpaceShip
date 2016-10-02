@@ -1,14 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.IO;
 
-public class explosions_script : MonoBehaviour 
+public class explosions_script : MonoBehaviour
 {
 
+    private static bool status;
 	void Start () 
 	{
-		GetComponent<AudioSource>().Play();
+        readFile();
+		if(status)GetComponent<AudioSource>().Play();
         Invoke("destroy",2);
 	}
+
+    static void readFile()
+    {
+        string filePath = Application.persistentDataPath + "/audio.txt";
+        status = Boolean.Parse(File.ReadAllText(filePath));
+    }
 
     void destroy()
     {

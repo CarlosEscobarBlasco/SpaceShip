@@ -18,7 +18,7 @@ public class ArtificialIntelligence : MonoBehaviour
     {
         movement = GetComponent<ShipMovement>();
         startMoving = true;
-        visionDistance = 3;
+        visionDistance = 3f;
     }
 
     // Update is called once per frame

@@ -21,6 +21,6 @@ public class DestroyerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(collider.gameObject);
+        if(collider.gameObject.tag=="Meteor"|| collider.gameObject.tag == "BlackHole"|| collider.gameObject.tag == "TurboSpeed") Destroy(collider.gameObject);
     }
 }

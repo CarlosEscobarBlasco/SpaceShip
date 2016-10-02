@@ -4,7 +4,7 @@ using System;
 
 public class AIPlus : MonoBehaviour
 {
-    private const float SPEED_REDUCER = 0.7f;
+    private const float SPEED_REDUCER = 0.75f;
     private GameObject player;
     public int distance;
     private float originalMaxSpeed;
@@ -22,10 +22,10 @@ public class AIPlus : MonoBehaviour
 	    boost(player.transform.position.y > gameObject.transform.position.y + distance);
 	}
 
-    private void boost(bool status)
+    private void boost(bool enable)
     {
-        gameObject.GetComponent<ShipMovement>().setMaxSpeed(status ? originalMaxSpeed * SPEED_REDUCER : originalMaxSpeed);
-        gameObject.GetComponent<Collider2D>().enabled = !status;
+        gameObject.GetComponent<ShipMovement>().setMaxSpeed(enable && (originalMaxSpeed>8) ? originalMaxSpeed * SPEED_REDUCER : originalMaxSpeed);
+        gameObject.GetComponent<Collider2D>().enabled = !enable;
     }
 
     public void setDistance(int distance)

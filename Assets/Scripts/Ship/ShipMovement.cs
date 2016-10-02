@@ -32,7 +32,7 @@ public class ShipMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         goForward();
-        ChangeSpeed();
+        accelerate();
 	}
 
     private void goForward()
@@ -74,7 +74,7 @@ public class ShipMovement : MonoBehaviour {
         shield = true;
     }
 
-    private void ChangeSpeed()
+    private void accelerate()
     {
         if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += acceleration;
     }
@@ -85,10 +85,10 @@ public class ShipMovement : MonoBehaviour {
         if (forwardSpeed < 0) forwardSpeed = 0;
     }
 
-    private void speedIncreaseByPercentage(float amount)
+    private void speedIncreaseByPercentage(float percentage)
     {
-        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += amount;
-        else forwardSpeed += amount/2;
+        if (forwardSpeed < maxSpeed && forwardSpeed > 0) forwardSpeed += percentage;
+        else forwardSpeed += percentage/2;
     }
 
     private bool insideBounds(bool right)

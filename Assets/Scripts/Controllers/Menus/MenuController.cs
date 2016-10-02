@@ -38,12 +38,13 @@ public class MenuController : MonoBehaviour {
         instructions.SetActive(false);
 	    audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
         audioController.playMainMenuMusic();
+        if (changeWorld) goToWorldSelectionMenu();
         DontDestroyOnLoad(transform.gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (changeWorld) goToWorldSelectionMenu();
+        
 	    if(Input.GetKeyDown(KeyCode.Escape)){
             if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
@@ -60,6 +61,7 @@ public class MenuController : MonoBehaviour {
 
     public void goToWorldSelectionMenu()
     {
+        changeWorld = false;
         audioController.playButtonSound();
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
@@ -134,7 +136,7 @@ public class MenuController : MonoBehaviour {
     public void returnMenu()
     {
         Destroy(audioController.gameObject);
-        SceneManager.LoadScene("Menus");
+        SceneManager.LoadScene("Menus2");
         sceneName = "Menus";
         changeWorld = false;
         Destroy(this.gameObject);
@@ -199,9 +201,10 @@ public class MenuController : MonoBehaviour {
 
     public void returnWorldSelectionMenu()
     {
-        SceneManager.LoadScene("Menus");
-        sceneName = "Menus";
         changeWorld = true;
+        SceneManager.LoadScene("Menus2");
+        //sceneName = "Menus";
+        //
         Destroy(this.gameObject);
     }
 }

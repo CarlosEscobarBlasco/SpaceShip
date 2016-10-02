@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
 
     public Camera mainCamera;
     public GameObject destroyer;
+    public GameObject spawner;
     public PauseController PauseController;
     public Text backCount;
     public GameObject pointer;
@@ -44,12 +45,18 @@ public class Controller : MonoBehaviour {
 	void Update ()
 	{
 	    sortArrayShips();
-	    setDestroyerToLastShip();
+	    updateDestroyer();
+	    updateSpawner();
 	}
 
-    private void setDestroyerToLastShip()
+    private void updateDestroyer()
     {
         if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count - 1]);
+    }
+
+    private void updateSpawner()
+    {
+        if (ships[0] != spawner.GetComponent<FollowShip>().getObjectToFollow() && spawner) setFirstShipToSpawner(ships[0]);
     }
 
     private void setPlayerToCamera()
@@ -60,6 +67,11 @@ public class Controller : MonoBehaviour {
     private void setLastShipToDestroyer(GameObject lastShip)
     {
         destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -4);
+    }
+
+    private void setFirstShipToSpawner(GameObject firstShip)
+    {
+        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 12);
     }
 
     private bool sortArrayShips()
