@@ -4,10 +4,14 @@ using UnityEngine.UI;
 
 public class paintLockedShip : MonoBehaviour
 {
+    //public FileController fileController;
     public FileController fileController;
+
+    private string[] ships;
 	// Use this for initialization
 	void Start ()
 	{
+	    ships = fileController.getShips();
 	    paint();
 	}
 
@@ -16,11 +20,12 @@ public class paintLockedShip : MonoBehaviour
 	
 	}
 
-    private void paint()
+    public void paint()
     {
-        for (int i = 2; i <= fileController.getNShip(); i++)
+        
+        for (int i = 0; i <= ships.Length-1; i++)
         {
-            transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
+            if(ships[i]=="1")transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
         }
     }
 

@@ -11,7 +11,7 @@ public class IntroLoading : MonoBehaviour {
     void Start()
     {
         blinkerText();
-        SceneManager.LoadSceneAsync("Menus2");
+        SceneManager.LoadSceneAsync("Menus");
     }
 
     // Update is called once per frame

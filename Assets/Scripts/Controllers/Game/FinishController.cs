@@ -14,12 +14,12 @@ public class FinishController : MonoBehaviour
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
     private AudioController audioController;
-    private FileController fileController;
+    //private FileController fileController;
 
     // Use this for initialization
     void Start ()
 	{
-        fileController = GameObject.FindGameObjectWithTag("FileController").GetComponent<FileController>();
+        //fileController = GameObject.FindGameObjectWithTag("FileController").GetComponent<FileController>();
         controller = gameController.GetComponent<Controller>();
 	    finishSliderController.setDistance(this.transform.position.y);
         audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
@@ -45,7 +45,7 @@ public class FinishController : MonoBehaviour
                 showPosition(collider.gameObject);
                 finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
                 Invoke("showFinalPanel",2);
-                if (controller.GetComponent<Controller>().positionOf(collider.gameObject)==1) unlocker();
+                //if (controller.GetComponent<Controller>().positionOf(collider.gameObject)==1) unlocker();
             }
         }else if (collider.tag == "Spawner")
         {
@@ -70,7 +70,7 @@ public class FinishController : MonoBehaviour
         finalPanel.show();
     }
 
-    void unlocker()
+    /*void unlocker()
     {
         if (controller.getSelectedWorld().Equals(fileController.getLastUnlockedWorldName()) && fileController.getNWorld() < 2)
         {
@@ -81,5 +81,5 @@ public class FinishController : MonoBehaviour
             fileController.writeUnlockeables(fileController.getNShip() + 1, fileController.getNWorld());
             fileController.writeHardWorldPassed(controller.getSelectedWorld());
         }
-    }
+    }*/
 }

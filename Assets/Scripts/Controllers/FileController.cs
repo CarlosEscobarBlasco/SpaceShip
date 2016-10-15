@@ -5,116 +5,122 @@ using UnityEngine.UI;
 
 public class FileController : MonoBehaviour
 {
-    private int nShip;
-    private int nWorld;
-    private string filePath;
-    private int earth;
-    private int mars;
-    private int saturn;
-    public Text debugText;
+
+    private static string[] ships;
+    private static string[] worlds;
+    private static int money;
+
+    private string shipsFile;
+    private string worldsFile;
+    private string moneyFile;
+
+    void Awake()
+    {
+        shipsFile = Application.persistentDataPath + "/ships";
+        readShipsFile();
+        worldsFile = Application.persistentDataPath + "/world";
+        readWorldFile();
+        moneyFile = Application.persistentDataPath + "/money";
+        readMoneyFile();
+        money = 10000;
+    }
+
+
+
     // Use this for initialization
-    void Start ()
-	{
-        if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1) Destroy(gameObject);
-        DontDestroyOnLoad(transform.gameObject);
-        filePath = Application.persistentDataPath + "/unlockeables.txt";
-        loadUnlockeables();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start(){ }
 
-    private void loadUnlockeables()
+    // Update is called once per frame
+    void Update() { }
+
+
+    private void readShipsFile()
     {
         try
         {
-            if (!File.Exists(filePath))
-            {
-                File.WriteAllText(filePath, "1,0,0,0,0"); //naves,mundos,tierra en dificil, marte en dificil, saturno en dificil
-                nShip = 1;
-                nWorld = 0;
-            }
-            else
-            {
-                read();
-            }
-        }catch (Exception e)
-        {
-
+            if (!File.Exists(shipsFile)) File.WriteAllText(shipsFile, "1,0,0,0,0"); //1 = unlocked, 0 = locked
+            ships = File.ReadAllText(shipsFile).Split(',');
         }
-        debugText.text = nShip + "," + nWorld + "," + earth + "," + mars + "," + saturn;
+        catch (Exception ex) { print("Fail to read ships file " + ex); }
     }
 
-    private void read()
+    private void readWorldFile()
     {
         try
         {
-            String[] result = File.ReadAllText(filePath).Split(',');
-            nShip = Int32.Parse(result[0]);
-            nWorld = Int32.Parse(result[1]);
-            earth = Int32.Parse(result[2]);
-            mars = Int32.Parse(result[3]);
-            saturn = Int32.Parse(result[4]);
+            if (!File.Exists(worldsFile)) File.WriteAllText(worldsFile, "1,0,0,0,"); // 1 = easy unlocked, 2 = med unlocked, 3 = hard unlocked, 0 = all locked
+            worlds = File.ReadAllText(worldsFile).Split(',');
         }
-        catch (Exception e)
+        catch (Exception ex) { print("Fail to read world file " + ex); }
+    }
+
+    private void readMoneyFile()
+    {
+        try
         {
-            
+            if (!File.Exists(moneyFile)) File.WriteAllText(moneyFile, "0");
+            money = int.Parse(File.ReadAllText(moneyFile));
         }
+        catch (Exception ex) { print("Fail to read money file " + ex); }
+
     }
 
-    public void writeUnlockeables(int ship, int world)
+    private void storeShips()
     {
-        File.WriteAllText(filePath, ship+","+world+","+earth+","+mars+","+saturn);
-        nShip = ship;
-        nWorld = world;
-    }
-
-    public void writeHardWorldPassed(String world)
-    {
-        switch (world)
+        string aux="";
+        for (int i = 0; i < ships.Length; i++)
         {
-            case "Earth": File.WriteAllText(filePath, nShip + "," + nWorld + "," + 1 + "," + mars + "," + saturn);
-                earth = 1;
-                break;
-            case "Mars": File.WriteAllText(filePath, nShip + "," + nWorld + "," + earth + "," + 1 + "," + saturn);
-                mars = 1;
-                break;
-            case "Saturn": File.WriteAllText(filePath, nShip + "," + nWorld + "," + earth + "," + mars + "," + 1);
-                saturn = 1;
-                break;
+            aux += ships[i] + ",";
         }
+        File.WriteAllText(shipsFile, aux);
     }
 
-    public int getNShip()
+    private void storeWorlds()
     {
-        return nShip;
-    }
-
-    public int getNWorld()
-    {
-        return nWorld;
-    }
-
-    public string getLastUnlockedWorldName()
-    {
-        switch (nWorld)
+        string aux="";
+        for (int i = 0; i < worlds.Length; i++)
         {
-            case 0:
-                return "Earth";
-            case 1:
-                return "Mars";
-            case 2:
-                return "Saturn";
+            aux += worlds[i] + ",";
         }
-        return "none";
+        File.WriteAllText(worldsFile, aux);
     }
-    public bool isWorldPassedInHard(String world)
+
+    private void storeMoney()
     {
-        if (world == "Earth" && earth == 0) return true;
-        if (world == "Mars" && mars == 0) return true;
-        if (world == "Saturn" && saturn == 0) return true;
-        return false;
+        File.WriteAllText(moneyFile, money.ToString());
     }
+
+    public string[] getShips() { return ships; }
+    public string[] getWorlds() { return worlds; }
+
+    public int getMoney()
+    {
+        return money;
+    }
+
+    private void unlockShip(int shipNumber)
+    {
+        ships[shipNumber] = "1";
+        storeShips();
+    }
+
+    public void increaseMoney(int amount)
+    {
+        money += amount;
+        storeMoney();
+    }
+
+    public void purchaseShip(int shipNumber, int amount)
+    {
+        increaseMoney(-amount);
+        unlockShip(shipNumber);
+    }
+
+    public void unlockWorld(int world, int difficulty)
+    {
+        if (int.Parse(worlds[world]) < difficulty) worlds[world] = difficulty + 1 + "";
+        if (int.Parse(worlds[world + 1]) == 0) worlds[world + 1] = "1";
+        storeWorlds();
+    }
+
 }

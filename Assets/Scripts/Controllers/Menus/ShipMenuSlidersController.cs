@@ -8,6 +8,12 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
     public Slider maxSpeedSlider;
     public Slider gripSlider;
     public Text shipNameText;
+    public FileController fileController;
+    public GameObject buyButton;
+    public Text price;
+    public GameObject nextButton;
+
+    private string[] unlockedShips;
     private MenuController menuController;
     private float maxAcc;
     private float maxGrip;
@@ -17,7 +23,7 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 	// Use this for initialization
 	void Start () {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
-
+	    unlockedShips = fileController.getShips();
         accelerationSlider.maxValue = 0.015f;
         accelerationSlider.minValue = 0;
         maxSpeedSlider.maxValue = 15;
@@ -36,6 +42,7 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 
     public void refreshValues(int actualShip)
     {
+        unlock(actualShip);
         //mirar para hacer en animacion
         accelerationSlider.value = 0;
         maxSpeedSlider.value = 0;
@@ -50,5 +57,25 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
     public void setShipToController()
     {
         menuController.selectShip("Ship" + actualShip);
+    }
+
+    void unlock(int actualShip)
+    {
+        if (unlockedShips[actualShip-1] == "1")
+        {
+            buyButton.SetActive(false);
+            nextButton.SetActive(true);
+        }
+        else
+        {
+            nextButton.SetActive(false);
+            buyButton.SetActive(true);
+            price.text= (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getPrice().ToString();
+        }
+    }
+
+    public int getActualShip()
+    {
+        return actualShip;
     }
 }

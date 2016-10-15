@@ -65,8 +65,8 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public Button selectWorldEasyButton;
     public Button selectWorldMedButton;
     public Button selectWorldHardButton;
-    public FileController fileController;
-    public GameObject shipMessage;
+    //public FileController fileController;
+    //public GameObject shipMessage;
     public GameObject planetMessage;
     //------------------------------------------------------------------------
     void Start() {
@@ -186,24 +186,15 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
         _currentPage = aPageIndex;
-        if (!worldMenusliderController && _currentPage > fileController.getNShip())
-        {
-            selectShipButton.interactable = false;
-            shipMessage.SetActive(true);
-        }
-        else if (!worldMenusliderController)
-        {
-            selectShipButton.interactable = true;
-            shipMessage.SetActive(false);
-        }
-        if (worldMenusliderController && _currentPage > fileController.getNWorld())
+
+        /*if (worldMenusliderController && _currentPage > fileController.getNWorld())
         {
             selectWorldEasyButton.interactable = false;
             selectWorldMedButton.interactable = false;
             selectWorldHardButton.interactable = false;
             planetMessage.SetActive(true);
-        }
-        else if (worldMenusliderController)
+        }*/
+        if (worldMenusliderController)
         {
             selectWorldEasyButton.interactable = true;
             selectWorldMedButton.interactable = true;

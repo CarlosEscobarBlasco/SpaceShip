@@ -8,6 +8,7 @@ public class ShipData : MonoBehaviour
     public float acceleration;
     public float maxSpeed;
     public string shipName;
+    public int price;
 
     void Start()
     {
@@ -26,4 +27,6 @@ public class ShipData : MonoBehaviour
     public float getMaxSpeed() { return maxSpeed; }
     
     public string getShipName() { return shipName; }
+
+    public int getPrice() { return price; }
 }

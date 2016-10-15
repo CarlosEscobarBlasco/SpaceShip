@@ -11,7 +11,6 @@ public class MenuController : MonoBehaviour {
     public GameObject mainPanel;
     public GameObject worldsPanel;
     public GameObject shipsPanel;
-    public GameObject gameSelector;
     public GameObject instructions;
     public GameObject credits;
 
@@ -48,7 +47,6 @@ public class MenuController : MonoBehaviour {
 	    if(Input.GetKeyDown(KeyCode.Escape)){
             if (shipsPanel.activeSelf) goToGameSelector();
             else if (worldsPanel.activeSelf) goToShipSelectionMenu();
-            else if(gameSelector.activeSelf) goToMainMenu();
             else if(instructions.activeSelf) goToMainMenu();
             else if(mainPanel.activeSelf) exitApp();
         }
@@ -66,7 +64,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(true);
-        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
     }
@@ -77,7 +74,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(true);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
     }
@@ -88,7 +84,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
     }
@@ -99,7 +94,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(true);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(false);
     }
@@ -110,7 +104,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(false);
         instructions.SetActive(true);
         credits.SetActive(false);
     }
@@ -121,7 +114,6 @@ public class MenuController : MonoBehaviour {
         shipsPanel.SetActive(false);
         mainPanel.SetActive(false);
         worldsPanel.SetActive(false);
-        gameSelector.SetActive(false);
         instructions.SetActive(false);
         credits.SetActive(true);
     }
@@ -136,7 +128,7 @@ public class MenuController : MonoBehaviour {
     public void returnMenu()
     {
         Destroy(audioController.gameObject);
-        SceneManager.LoadScene("Menus2");
+        SceneManager.LoadScene("Menus");
         sceneName = "Menus";
         changeWorld = false;
         Destroy(this.gameObject);
@@ -202,7 +194,7 @@ public class MenuController : MonoBehaviour {
     public void returnWorldSelectionMenu()
     {
         changeWorld = true;
-        SceneManager.LoadScene("Menus2");
+        SceneManager.LoadScene("Menus");
         //sceneName = "Menus";
         //
         Destroy(this.gameObject);
