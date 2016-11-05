@@ -127,6 +127,7 @@ public class MenuController : MonoBehaviour {
 
     public void returnMenu()
     {
+        Destroy(GameObject.FindGameObjectWithTag("FileController"));
         Destroy(audioController.gameObject);
         SceneManager.LoadScene("Menus");
         sceneName = "Menus";
@@ -193,10 +194,10 @@ public class MenuController : MonoBehaviour {
 
     public void returnWorldSelectionMenu()
     {
+        Destroy(GameObject.FindGameObjectWithTag("FileController"));
         changeWorld = true;
         SceneManager.LoadScene("Menus");
-        //sceneName = "Menus";
-        //
+        sceneName = "Menus";
         Destroy(this.gameObject);
     }
 }

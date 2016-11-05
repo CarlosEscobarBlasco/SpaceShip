@@ -22,13 +22,15 @@ public class FileController : MonoBehaviour
         readWorldFile();
         moneyFile = Application.persistentDataPath + "/money";
         readMoneyFile();
-        money = 10000;
     }
 
 
 
     // Use this for initialization
-    void Start(){ }
+    void Start()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     // Update is called once per frame
     void Update() { }

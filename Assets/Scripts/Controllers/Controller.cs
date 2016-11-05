@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour {
 
     public Camera mainCamera;
     public GameObject destroyer;
-    public GameObject spawner;
+    //public GameObject spawner;
     public PauseController PauseController;
     public Text backCount;
     public GameObject pointer;
@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour {
 	{
 	    sortArrayShips();
 	    updateDestroyer();
-	    updateSpawner();
+	    //updateSpawner();
 	}
 
     private void updateDestroyer()
@@ -54,10 +54,10 @@ public class Controller : MonoBehaviour {
         if (ships[ships.Count - 1] != destroyer.GetComponent<FollowShip>().getObjectToFollow()) setLastShipToDestroyer(ships[ships.Count - 1]);
     }
 
-    private void updateSpawner()
-    {
-        if (ships[0] != spawner.GetComponent<FollowShip>().getObjectToFollow() && spawner) setFirstShipToSpawner(ships[0]);
-    }
+    //private void updateSpawner()
+    //{
+    //    if (ships[0] != spawner.GetComponent<FollowShip>().getObjectToFollow() && spawner) setFirstShipToSpawner(ships[0]);
+    //}
 
     private void setPlayerToCamera()
     {
@@ -69,10 +69,10 @@ public class Controller : MonoBehaviour {
         destroyer.GetComponent<FollowShip>().setObjectToFollow(lastShip, -4);
     }
 
-    private void setFirstShipToSpawner(GameObject firstShip)
-    {
-        spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 12);
-    }
+    //private void setFirstShipToSpawner(GameObject firstShip)
+    //{
+    //    spawner.GetComponent<FollowShip>().setObjectToFollow(firstShip, 12);
+    //}
 
     private bool sortArrayShips()
     {
@@ -117,26 +117,6 @@ public class Controller : MonoBehaviour {
     public GameObject getPlayer()
     {
         return player;
-    }
-
-    public int getCollisionsOfPlayer()
-    {
-        return player.GetComponent<ShipStatistics>().getCollisions();
-    }
-
-    public string getTimeOfPlayer()
-    {
-        return trasnformTimeFormt(player.GetComponent<ShipStatistics>().getDuration());
-    }
-
-    private string trasnformTimeFormt(float time)
-    {
-        int min = (int)time/60;
-        float sec;
-        float.TryParse((time%60).ToString().Split('.')[0], out sec);
-        float milSec;
-        float.TryParse(time.ToString().Split('.')[1].Substring(0, 2),out milSec);
-        return (min>9?min.ToString():"0"+ min) + ":" + (sec>9?sec.ToString():"0"+sec) + ":" + (milSec>9?milSec.ToString():milSec+"0");
     }
 
     private void createShips(){

@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class FinishPanelController : MonoBehaviour
 {
 
-    public Controller controller;
+    public FinishController finishController;
     public Text position;
     public Text time;
     public Text collisions;
+    public Text reward;
     private MenuController menuController;
 	// Use this for initialization
 	void Start () {
@@ -28,8 +29,9 @@ public class FinishPanelController : MonoBehaviour
     public void show()
     {      
         gameObject.SetActive(true);
-        time.text = "Time: "+controller.getTimeOfPlayer();
-        collisions.text = "Collisions: "+controller.getCollisionsOfPlayer();
+        time.text = "Time: "+finishController.getTimeOfPlayer();
+        collisions.text = "Collisions: "+finishController.getCollisionsOfPlayer();
+        reward.text = "Reward: "+finishController.getReward();
 
     }
 
