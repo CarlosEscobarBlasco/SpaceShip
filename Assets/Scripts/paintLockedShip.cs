@@ -22,12 +22,9 @@ public class paintLockedShip : MonoBehaviour
 
     public void paint()
     {
-        
-        for (int i = 0; i <= ships.Length-1; i++)
+        for (int i = 0; i < ships.Length; i++)
         {
-            if(ships[i]=="1")transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
+            if(ships[i]=="1") transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
         }
     }
-
-
 }
