@@ -11,7 +11,7 @@ public class paintLockedShip : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    ships = fileController.getShips();
+	    //ships = fileController.getShipsColor();
 	    paint();
 	}
 
@@ -20,11 +20,12 @@ public class paintLockedShip : MonoBehaviour
 	
 	}
 
+    //TODO implement this function
     public void paint()
     {
-        for (int i = 0; i < ships.Length; i++)
-        {
-            if(ships[i]=="1") transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
-        }
+        //for (int i = 0; i < ships.Length; i++)
+        //{
+        //    if(ships[i]=="1") transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
+        //}
     }
 }

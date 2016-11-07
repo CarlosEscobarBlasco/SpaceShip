@@ -23,7 +23,7 @@ public class Buy : MonoBehaviour {
     public void purchase()
     {
         if (showMoney.getAmount() < int.Parse(amount.text)) return;
-        fileController.purchaseShip(shipController.getActualShip()-1,int.Parse(amount.text));
+        //fileController.purchaseShip(shipController.getActualShip()-1,int.Parse(amount.text));
         showMoney.refreshValue();
         paintShips.paint();
         nextButton.SetActive(true);

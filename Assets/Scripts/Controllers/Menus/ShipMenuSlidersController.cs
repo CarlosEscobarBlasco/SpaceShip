@@ -23,7 +23,7 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 	// Use this for initialization
 	void Start () {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
-	    unlockedShips = fileController.getShips();
+	    //unlockedShips = fileController.getShipsColor(1);
         accelerationSlider.maxValue = 0.015f;
         accelerationSlider.minValue = 0;
         maxSpeedSlider.maxValue = 15;
