@@ -31,6 +31,8 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
         maxSpeedSlider.minValue = 0;
         gripSlider.maxValue = 5;
         gripSlider.minValue = 0;
+	    actualColor = 1;
+	    actualShip = 1;
         refreshValues(1);
 	}
 	
@@ -45,6 +47,7 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
     {
         unlockedShips = fileController.getShipColors(actualShip - 1); 
         unlock(1);
+        actualColor = 1;
         //mirar para hacer en animacion
         accelerationSlider.value = 0;
         maxSpeedSlider.value = 0;
@@ -65,7 +68,7 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 
     public void setShipToController()
     {
-        menuController.selectShip("Ship" + actualShip);
+        menuController.selectShip("Ship" + actualShip+"-"+actualColor);
     }
 
     void unlock(int actualColor)

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class paintLockedPlanets : MonoBehaviour {
-    //public FileController fileController;
+    public FileController fileController;
     // Use this for initialization
     void Start () {
         paint();
@@ -16,9 +16,10 @@ public class paintLockedPlanets : MonoBehaviour {
 
     private void paint()
     {
-        /*for (int i = 1; i <= fileController.getNWorld(); i++)
+        string[] worlds = fileController.getWorlds();
+        for (int i = 0; i < worlds.Length; i++)
         {
-            transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
-        }*/
+            if (worlds[i] == "1") transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
+        }
     }
 }

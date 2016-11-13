@@ -90,7 +90,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerp = false;
 
         // init
-        scrollRectUpGo = scrollRectUp.gameObject;
+        if (scrollRectUp != null) scrollRectUpGo = scrollRectUp.gameObject;
         SetPagePositions();
         SetPage(startingPage);
         InitPageSelection();
@@ -117,7 +117,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 // snap to target and stop lerping
                 _container.anchoredPosition = _lerpTo;
                 _lerp = false;
-                scrollRectUpGo.SetActive(true);
+                if (scrollRectUp != null) scrollRectUpGo.SetActive(true);
                 // clear also any scrollrect move that may interfere with our lerping
                 _scrollRectComponent.velocity = Vector2.zero;
             }
@@ -189,7 +189,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         aPageIndex = Mathf.Clamp(aPageIndex, 0, _pageCount - 1);
         _lerpTo = _pagePositions[aPageIndex];
         _lerp = true;
-        scrollRectUpGo.transform.GetChild(_currentPage).gameObject.SetActive(false);
+        if (scrollRectUp != null) scrollRectUpGo.transform.GetChild(_currentPage).gameObject.SetActive(false);
         _currentPage = aPageIndex;
 
         /*if (worldMenusliderController && _currentPage > fileController.getNWorld())
@@ -217,9 +217,12 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         else
         {
             shipMenusliderController.refreshValues(aPageIndex + 1);
-            scrollRectUpGo.transform.GetChild(_currentPage).gameObject.SetActive(true);
-            scrollRectUp.content = scrollRectUpGo.transform.GetChild(_currentPage).GetComponent<RectTransform>();
-            scrollRectUpGo.GetComponent<ScrollSnapRectUp>().setStart();
+            if (scrollRectUp != null)
+            {
+                scrollRectUpGo.transform.GetChild(_currentPage).gameObject.SetActive(true);
+                scrollRectUp.content = scrollRectUpGo.transform.GetChild(_currentPage).GetComponent<RectTransform>();
+                scrollRectUpGo.GetComponent<ScrollSnapRectUp>().setStart();
+            }
         }
     }
 
@@ -270,13 +273,13 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     //------------------------------------------------------------------------
     private void NextScreen() {
-        scrollRectUpGo.SetActive(false);
+        if (scrollRectUp != null) scrollRectUpGo.SetActive(false);
         LerpToPage(_currentPage + 1);
     }
 
     //------------------------------------------------------------------------
     private void PreviousScreen() {
-        scrollRectUpGo.SetActive(false);
+        if (scrollRectUp != null) scrollRectUpGo.SetActive(false);
         LerpToPage(_currentPage - 1);
     }
 

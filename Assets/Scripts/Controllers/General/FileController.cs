@@ -56,7 +56,7 @@ public class FileController : MonoBehaviour
     {
         try
         {
-            if (!File.Exists(worldsFile)) File.WriteAllText(worldsFile, "1,0,0,0,"); // 1 = easy unlocked, 2 = med unlocked, 3 = hard unlocked, 0 = all locked
+            if (!File.Exists(worldsFile)) File.WriteAllText(worldsFile, "1,0,0,"); // 1 = easy unlocked, 2 = med unlocked, 3 = hard unlocked, 0 = all locked
             worlds = File.ReadAllText(worldsFile).Split(',');
         }
         catch (Exception ex) { print("Fail to read world file " + ex); }

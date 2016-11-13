@@ -139,11 +139,18 @@ public class MenuController : MonoBehaviour {
     {
         selectedShip = ship;
         rivalShips.Clear();
-        for (int i = 1; i <= 6; i++)
+        int rivalShip = 0;
+        int rivalColor = 0;
+        for (int i = 0; i < 4; i = i) // 4 es el numero de rivales
         {
-            if(selectedShip!="Ship"+i)rivalShips.Add("Ship"+i);
+            rivalShip = Random.Range(1, 5);
+            rivalColor = Random.Range(1, 5);
+            if (selectedShip != "Ship" + rivalShip + "-" + rivalColor && !rivalShips.Contains("Ship" + rivalShip + "-" + rivalColor))
+            {
+                rivalShips.Add("Ship" + rivalShip + "-" + rivalColor);
+                i++;
+            }
         }
-
         goToWorldSelectionMenu();
     }
 
@@ -157,7 +164,7 @@ public class MenuController : MonoBehaviour {
         return shuffle(rivalShips);
     }
 
-    public List<string>  shuffle(List<string> list)
+    public List<string> shuffle(List<string> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
