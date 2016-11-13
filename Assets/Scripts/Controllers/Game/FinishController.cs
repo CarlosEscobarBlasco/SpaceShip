@@ -45,7 +45,7 @@ public class FinishController : MonoBehaviour
             if (collider.tag == "Player")
             {
                 player = collider.gameObject;
-                reward = gameController.GetComponent<Rewards>().getReward();
+                reward = gameController.GetComponent<Rewards>().getReward(player.GetComponent<ShipStatistics>().getCollisions(), player.GetComponent<ShipStatistics>().getDuration());
                 fileController.increaseMoney(reward);
                 audioController.playFinishSound();
                 showPosition(collider.gameObject);
@@ -67,7 +67,7 @@ public class FinishController : MonoBehaviour
 
     void showPosition(GameObject ship)
     {
-        finalPosition.text = controller.GetComponent<Controller>().positionOf(ship) + "º";
+        finalPosition.text = " "+controller.GetComponent<Controller>().positionOf(ship) + "º";
         positionController.setPosition(finalPosition.text);
     }
 

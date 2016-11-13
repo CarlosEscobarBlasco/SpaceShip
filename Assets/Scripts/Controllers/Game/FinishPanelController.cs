@@ -10,10 +10,9 @@ public class FinishPanelController : MonoBehaviour
     public Text time;
     public Text collisions;
     public Text reward;
-    private MenuController menuController;
-	// Use this for initialization
+	
+    // Use this for initialization
 	void Start () {
-        menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
     }
 	
 	// Update is called once per frame
@@ -23,7 +22,7 @@ public class FinishPanelController : MonoBehaviour
 
     public void setPosition(int position)
     {
-        this.position.text = position + "º";
+        this.position.text = " "+position + "º";
     }
 
     public void show()
@@ -35,18 +34,5 @@ public class FinishPanelController : MonoBehaviour
 
     }
 
-    public void playAgain()
-    {
-       menuController.startQuickRace(menuController.getSceneName());
-    }
-
-    public void goToMainMenu()
-    {
-        menuController.returnMenu();
-    }
-
-    public void goToSelectWorld()
-    {
-        menuController.returnWorldSelectionMenu();
-    }
+    
 }

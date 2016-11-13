@@ -207,4 +207,19 @@ public class Controller : MonoBehaviour {
         return selectedWorld;
     }
 
+    public void restartGame()
+    {
+        menuController.startQuickRace(menuController.getSceneName());
+    }
+
+    public void goToMainMenu()
+    {
+        menuController.returnMenu();
+    }
+
+    public void goToSelectWorld()
+    {
+        menuController.returnWorldSelectionMenu();
+    }
+
 }
