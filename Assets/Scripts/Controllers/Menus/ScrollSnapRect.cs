@@ -67,7 +67,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public Button selectWorldEasyButton;
     public Button selectWorldMedButton;
     public Button selectWorldHardButton;
-    //public FileController fileController;
+    public FileController fileController;
     //public GameObject shipMessage;
     public GameObject planetMessage;
     //------------------------------------------------------------------------
@@ -191,15 +191,14 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         _lerp = true;
         if (scrollRectUp != null) scrollRectUpGo.transform.GetChild(_currentPage).gameObject.SetActive(false);
         _currentPage = aPageIndex;
-
-        /*if (worldMenusliderController && _currentPage > fileController.getNWorld())
+        if (worldMenusliderController && fileController.getWorlds()[_currentPage] == "0")
         {
             selectWorldEasyButton.interactable = false;
             selectWorldMedButton.interactable = false;
             selectWorldHardButton.interactable = false;
             planetMessage.SetActive(true);
-        }*/
-        if (worldMenusliderController)
+        }
+        else if (worldMenusliderController)
         {
             selectWorldEasyButton.interactable = true;
             selectWorldMedButton.interactable = true;
