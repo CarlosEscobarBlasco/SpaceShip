@@ -19,11 +19,12 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
     private float maxGrip;
     private float maxSpeed;
     private int actualShip;
+    private int actualColor;
 
 	// Use this for initialization
 	void Start () {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
-	    //unlockedShips = fileController.getShipsColor(1);
+	    unlockedShips = fileController.getShipColors(0);
         accelerationSlider.maxValue = 0.015f;
         accelerationSlider.minValue = 0;
         maxSpeedSlider.maxValue = 15;
@@ -42,16 +43,24 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
 
     public void refreshValues(int actualShip)
     {
-        unlock(actualShip);
+        unlockedShips = fileController.getShipColors(actualShip - 1); 
+        unlock(1);
         //mirar para hacer en animacion
         accelerationSlider.value = 0;
         maxSpeedSlider.value = 0;
         gripSlider.value = 0;
-        maxAcc = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getAcceleration();
-        maxSpeed = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getMaxSpeed();
-        maxGrip = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getLateralSpeeed();
-        shipNameText.text = (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getShipName();
+        maxAcc = (Resources.Load("Prefabs/Ships/Ship" + actualShip + "-1") as GameObject).GetComponent<ShipData>().getAcceleration();
+        maxSpeed = (Resources.Load("Prefabs/Ships/Ship" + actualShip + "-1") as GameObject).GetComponent<ShipData>().getMaxSpeed();
+        maxGrip = (Resources.Load("Prefabs/Ships/Ship" + actualShip + "-1") as GameObject).GetComponent<ShipData>().getLateralSpeeed();
+        shipNameText.text = (Resources.Load("Prefabs/Ships/Ship" + actualShip + "-1") as GameObject).GetComponent<ShipData>().getShipName();
         this.actualShip=actualShip;
+    }
+
+    public void refreshColorValues(int actualColor)
+    {
+        unlock(actualColor);
+        shipNameText.text = (Resources.Load("Prefabs/Ships/Ship" + actualShip+"-"+actualColor) as GameObject).GetComponent<ShipData>().getShipName();
+        this.actualColor = actualColor;
     }
 
     public void setShipToController()
@@ -59,9 +68,9 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
         menuController.selectShip("Ship" + actualShip);
     }
 
-    void unlock(int actualShip)
+    void unlock(int actualColor)
     {
-        if (unlockedShips[actualShip-1] == "1")
+        if (unlockedShips[actualColor - 1] == "1")
         {
             buyButton.SetActive(false);
             nextButton.SetActive(true);
@@ -70,12 +79,17 @@ public class ShipMenuSlidersController : MonoBehaviour, MenuSliderController {
         {
             nextButton.SetActive(false);
             buyButton.SetActive(true);
-            price.text= (Resources.Load("Prefabs/Ships/Ship" + actualShip) as GameObject).GetComponent<ShipData>().getPrice().ToString();
+            price.text = (Resources.Load("Prefabs/Ships/Ship" + actualShip + "-" + actualColor) as GameObject).GetComponent<ShipData>().getPrice().ToString();
         }
     }
 
     public int getActualShip()
     {
         return actualShip;
+    }
+
+    public int getActualColor()
+    {
+        return actualColor;
     }
 }

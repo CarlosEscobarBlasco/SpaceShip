@@ -65,6 +65,7 @@ public class ScrollSnapRectUp : MonoBehaviour, IBeginDragHandler, IEndDragHandle
     private List<Image> _pageSelectionImages;
 
     public Button selectShipButton;
+    public ShipMenuSlidersController shipMenusliderController;
 
     //------------------------------------------------------------------------
     void Start()
@@ -230,6 +231,7 @@ public class ScrollSnapRectUp : MonoBehaviour, IBeginDragHandler, IEndDragHandle
             prevButton.SetActive(true);
             nextButton.SetActive(true);
         }
+        shipMenusliderController.refreshColorValues(aPageIndex + 1);
     }
 
     //------------------------------------------------------------------------

@@ -26,8 +26,6 @@ public class FileController : MonoBehaviour
         readMoneyFile();
     }
 
-
-
     // Use this for initialization
     void Start()
     {
@@ -43,7 +41,7 @@ public class FileController : MonoBehaviour
     {
         try
         {
-            if (!File.Exists(shipsFile)) File.WriteAllText(shipsFile, "1,0,0,0.1,0,0,0.1,0,0,0.1,0,0,0.1,0,0,0"); //1 = unlocked, 0 = locked
+            if (!File.Exists(shipsFile)) File.WriteAllText(shipsFile, "1,0,0,0.1,0,0,0.1,0,0,0.1,0,0,0"); //1 = unlocked, 0 = locked
             numberOfShips = File.ReadAllText(shipsFile).Split('.').Length;
             ships = new ship[numberOfShips];
             for (int i = 0; i < numberOfShips; i++)
@@ -75,7 +73,6 @@ public class FileController : MonoBehaviour
 
     }
 
-
     private void storeShips()
     {
         string aux = "";
@@ -106,11 +103,16 @@ public class FileController : MonoBehaviour
         File.WriteAllText(moneyFile, money.ToString());
     }
 
-    //TODO check if this function is needed, if not delete it. (I'm not sure if we comment in english or spanish :D )
-    /*public string[] getShipsColor(int ship)
+    //TO DO check if this function is needed, if not delete it. (I'm not sure if we comment in english or spanish :D )
+    public string[] getShipColors(int ship)
     {
-        return ships[ship].color;
-    }*/
+        return ships[ship].color;//except
+    }
+
+    public int getShipCount()
+    {
+        return ships.Length;
+    }
 
     public string[] getWorlds() { return worlds; }
 
