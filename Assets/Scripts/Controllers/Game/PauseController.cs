@@ -7,6 +7,7 @@ public class PauseController : MonoBehaviour
     private MenuController menuController;
     public GameObject pausePanel;
     public GameObject spawner;
+    public Controller gameController;
 
     // Use this for initialization
     void Start()
@@ -26,6 +27,12 @@ public class PauseController : MonoBehaviour
         menuController.returnMenu();
     }
 
+    public void restartGame()
+    {
+        resumeGame();
+        gameController.restartGame();
+    }
+
     public void activePauseGame()
     {
         pausePanel.SetActive(true);
@@ -38,7 +45,7 @@ public class PauseController : MonoBehaviour
         resumeGame();
     }
 
-    public void resumeGame()
+    void resumeGame()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Meteor");
         foreach (GameObject go in objects)
