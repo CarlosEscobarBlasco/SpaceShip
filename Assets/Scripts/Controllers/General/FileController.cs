@@ -30,7 +30,6 @@ public class FileController : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(transform.gameObject);
-        purchaseShip(0, 2, 0);
     }
 
     // Update is called once per frame
@@ -56,7 +55,7 @@ public class FileController : MonoBehaviour
     {
         try
         {
-            if (!File.Exists(worldsFile)) File.WriteAllText(worldsFile, "1,0,0,"); // 1 = easy unlocked, 2 = med unlocked, 3 = hard unlocked, 0 = all locked
+            if (!File.Exists(worldsFile)) File.WriteAllText(worldsFile, "1,0,0"); // 1 = unlocked, 0 = locked
             worlds = File.ReadAllText(worldsFile).Split(',');
         }
         catch (Exception ex) { print("Fail to read world file " + ex); }
@@ -93,7 +92,7 @@ public class FileController : MonoBehaviour
         string aux="";
         for (int i = 0; i < worlds.Length; i++)
         {
-            aux += worlds[i] + ",";
+            if (i < worlds.Length - 1) aux += worlds[i] + ",";
         }
         File.WriteAllText(worldsFile, aux);
     }
@@ -103,7 +102,7 @@ public class FileController : MonoBehaviour
         File.WriteAllText(moneyFile, money.ToString());
     }
 
-    //TO DO check if this function is needed, if not delete it. (I'm not sure if we comment in english or spanish :D )
+    //TODO check if this function is needed, if not delete it. (I'm not sure if we comment in english or spanish :D )
     public string[] getShipColors(int ship)
     {
         return ships[ship].color;//except
@@ -114,11 +113,19 @@ public class FileController : MonoBehaviour
         return ships.Length;
     }
 
-    public string[] getWorlds() { return worlds; }
-
-    public bool isUnlocked(int ship, int color)
+    public int getWorldCount()
     {
-        return ships[ship].color[color].Equals("1") ? true : false;
+        return worlds.Length;
+    }
+
+    public bool isWorldUnlocked(int world)
+    {
+        return worlds[world].Equals("1");
+    }
+
+    public bool isShipUnlocked(int ship, int color)
+    {
+        return ships[ship].color[color].Equals("1");
     }
 
     public int getMoney()
@@ -130,6 +137,12 @@ public class FileController : MonoBehaviour
     {
         ships[shipNumber].unlock(color);
         storeShips();
+    }
+
+    private void unlockWorld(int world)
+    {
+        worlds[world] = "1";
+        storeWorlds();
     }
 
     public void increaseMoney(int amount)
@@ -144,11 +157,10 @@ public class FileController : MonoBehaviour
         unlockShip(shipNumber, color);
     }
 
-    public void unlockWorld(int world, int difficulty)
+    public void purchaseWorld(int world, int price)
     {
-        if (int.Parse(worlds[world]) < difficulty) worlds[world] = difficulty + 1 + "";
-        if (int.Parse(worlds[world + 1]) == 0) worlds[world + 1] = "1";
-        storeWorlds();
+        increaseMoney(-price);
+        unlockWorld(world);
     }
 
     private class ship

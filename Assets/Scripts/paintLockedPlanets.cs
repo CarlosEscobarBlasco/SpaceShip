@@ -14,12 +14,11 @@ public class paintLockedPlanets : MonoBehaviour {
 	
 	}
 
-    private void paint()
+    public void paint()
     {
-        string[] worlds = fileController.getWorlds();
-        for (int i = 0; i < worlds.Length; i++)
+        for (int i = 0; i < fileController.getWorldCount(); i++)
         {
-            if (worlds[i] == "1") transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
+            if (fileController.isWorldUnlocked(i)) transform.GetChild(i).GetComponentInChildren<Image>().color = Color.white;
         }
     }
 }
