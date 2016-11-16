@@ -92,7 +92,8 @@ public class FileController : MonoBehaviour
         string aux="";
         for (int i = 0; i < worlds.Length; i++)
         {
-            if (i < worlds.Length - 1) aux += worlds[i] + ",";
+            aux += worlds[i];
+            if (i < worlds.Length - 1)  aux += ",";
         }
         File.WriteAllText(worldsFile, aux);
     }
