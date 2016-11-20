@@ -5,20 +5,20 @@ using System.IO;
 
 public class explosions_script : MonoBehaviour
 {
+    private static AudioController audioController;
 
-    private static bool status;
+    void Awake()
+    {
+        if (audioController) return;
+        audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
+    }
+
 	void Start () 
 	{
-        readFile();
-		if(status)GetComponent<AudioSource>().Play();
+		if(audioController.getStatus())GetComponent<AudioSource>().Play();
         Invoke("destroy",2);
 	}
 
-    static void readFile()
-    {
-        string filePath = Application.persistentDataPath + "/audio.txt";
-        status = Boolean.Parse(File.ReadAllText(filePath));
-    }
 
     void destroy()
     {

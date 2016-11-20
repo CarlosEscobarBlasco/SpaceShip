@@ -28,7 +28,7 @@ public class paintLockedShip : MonoBehaviour
         for (int i = 0; i < nShips; i++)
         {
             colors = fileController.getShipColors(i);
-            if (colors[i] == "1") transform.GetChild(i+1).GetComponentInChildren<Image>().color = Color.white;
+            //if (colors[i] == "1") transform.GetChild(i+1).GetComponentInChildren<Image>().color = Color.white;
             int counter = 0;
             foreach (string color in colors)
             {

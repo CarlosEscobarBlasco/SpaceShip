@@ -5,14 +5,21 @@ using System.Collections;
 public class SoundEffect : MonoBehaviour
 {
 
-    public AudioClip clip;
-    //private AudioSource audioSource;
+
+    private static AudioController audioController;
+    private AudioSource audioSource;
+
+
+    void Awake()
+    {
+        if (audioController) return;
+        audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
+    }
 
     // Use this for initialization
     void Start()
     {
-        //audioSource = GetComponent<AudioSource>();
-        //audioSource.clip = clip;
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,17 +30,8 @@ public class SoundEffect : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.tag == "Player" || collider.tag=="CPU")
-        {
-            //GetComponent<AudioSource>().Play();
-            AudioSource audio = gameObject.AddComponent<AudioSource>();
-            audio.clip = clip;
-            audio.minDistance = 5;
-            audio.maxDistance = 15;
-            audio.spatialBlend = 1;
-            audio.priority = 256;
-            audio.Play();
-
-        }
+        if (!audioController.getStatus()) return;
+        if (collider.tag != "Player" && collider.tag != "CPU") return;
+        audioSource.Play();
     }
 }

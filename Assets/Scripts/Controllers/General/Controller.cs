@@ -152,11 +152,12 @@ public class Controller : MonoBehaviour {
     private IEnumerator startBackCount()
     {
         pointer.SetActive(true);
-        for (int i = 0; i < ships.Count; i++)
+        foreach (var ship in ships)
         {
-            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Handheld) ships[i].GetComponent<TouchListener>().enabled = false;
-            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = false;
-            ships[i].GetComponent<ShipMovement>().enabled = false;
+            ship.GetComponent<ShipMovement>().enabled = false;
+            if (ship.tag != "Player") continue;
+            if (SystemInfo.deviceType == DeviceType.Handheld)ship.GetComponent<TouchListener>().enabled = false;
+            if (SystemInfo.deviceType == DeviceType.Desktop)ship.GetComponent<KeyListener>().enabled = false;         
         }
         audioController.playCountDownSound();
         backCount.text = "3";
@@ -188,11 +189,12 @@ public class Controller : MonoBehaviour {
                 break;
         }
         backCount.text = "";
-        for (int i = 0; i < ships.Count; i++)
+        foreach (var ship in ships)
         {
-            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Handheld) ships[i].GetComponent<TouchListener>().enabled = true;
-            if (ships[i].tag == "Player" && SystemInfo.deviceType == DeviceType.Console) ships[i].GetComponent<ShipMovement>().enabled = true;
-            ships[i].GetComponent<ShipMovement>().enabled = true;
+            ship.GetComponent<ShipMovement>().enabled = true;
+            if (ship.tag != "Player") continue;
+            if (SystemInfo.deviceType == DeviceType.Handheld) ship.GetComponent<TouchListener>().enabled = true;
+            if (SystemInfo.deviceType == DeviceType.Desktop) ship.GetComponent<KeyListener>().enabled = true;
         }
         pointer.SetActive(false);
     }

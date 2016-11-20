@@ -6,7 +6,7 @@ public class MenuStarReorganiniser : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-	    gameObject.transform.position = new Vector3(Screen.width,Screen.height/2,70);
+	    gameObject.transform.position = new Vector3(Screen.width+10,Screen.height/2,70);
         gameObject.transform.localScale = new Vector3(1,Screen.height,0);
 	}
 	
@@ -22,6 +22,6 @@ public class MenuStarReorganiniser : MonoBehaviour {
 
     Vector3 randomPosition()
     {
-        return new Vector3(0, Random.Range(0, Screen.height), 70);
+        return new Vector3(-10, Random.Range(0, Screen.height), 70);
     }
 }
