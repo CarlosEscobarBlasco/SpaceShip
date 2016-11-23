@@ -117,6 +117,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 _container.anchoredPosition = _lerpTo;
                 _lerp = false;
                 if (scrollRectUp != null) scrollRectUpGo.SetActive(true);
+                _scrollRectComponent.transform.GetChild(0).transform.GetChild(_currentPage).gameObject.SetActive(false);
                 // clear also any scrollrect move that may interfere with our lerping
                 _scrollRectComponent.velocity = Vector2.zero;
             }
@@ -268,12 +269,14 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     //------------------------------------------------------------------------
     private void NextScreen() {
         if (scrollRectUp != null) scrollRectUpGo.SetActive(false);
+        _scrollRectComponent.transform.GetChild(0).transform.GetChild(_currentPage+1).gameObject.SetActive(true);
         LerpToPage(_currentPage + 1);
     }
 
     //------------------------------------------------------------------------
     private void PreviousScreen() {
         if (scrollRectUp != null) scrollRectUpGo.SetActive(false);
+        _scrollRectComponent.transform.GetChild(0).transform.GetChild(_currentPage-1).gameObject.SetActive(true);
         LerpToPage(_currentPage - 1);
     }
 
