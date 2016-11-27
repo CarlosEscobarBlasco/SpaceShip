@@ -15,9 +15,14 @@ public class Rewards : MonoBehaviour
 	
 	}
 
+    public int getInitialReward()
+    {
+        return 150;
+    }
+
     public int getReward(int collisions, float time)
     {
-        double reward=150; //initial reward
+        double reward = getInitialReward();
         double position = gameObject.GetComponent<Controller>().positionOf(player);
         int difficulty = gameObject.GetComponent<Controller>().getDifficulty();
         reward -= collisions + time;

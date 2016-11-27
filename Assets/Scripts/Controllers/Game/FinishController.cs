@@ -17,7 +17,7 @@ public class FinishController : MonoBehaviour
     private AudioController audioController;
     private GameObject player;
     private FileController fileController;
-    private int reward;
+    private int finalReward;
 
     // Use this for initialization
     void Start ()
@@ -45,8 +45,8 @@ public class FinishController : MonoBehaviour
             if (collider.tag == "Player")
             {
                 player = collider.gameObject;
-                reward = gameController.GetComponent<Rewards>().getReward(player.GetComponent<ShipStatistics>().getCollisions(), player.GetComponent<ShipStatistics>().getDuration());
-                fileController.increaseMoney(reward);
+                finalReward = gameController.GetComponent<Rewards>().getReward(player.GetComponent<ShipStatistics>().getCollisions(), player.GetComponent<ShipStatistics>().getDuration());
+                fileController.increaseMoney(finalReward);
                 audioController.playFinishSound();
                 showPosition(collider.gameObject);
                 finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
@@ -85,10 +85,19 @@ public class FinishController : MonoBehaviour
     {
         return trasnformTimeFormat(player.GetComponent<ShipStatistics>().getDuration());
     }
+    public float getTimeOfPlayerNoFormat()
+    {
+        return player.GetComponent<ShipStatistics>().getDuration();
+    }
 
     public int getReward()
     {
-        return reward;
+        return finalReward;
+    }
+
+    public int getInitialReward()
+    {
+        return gameController.GetComponent<Rewards>().getInitialReward();
     }
 
     private string trasnformTimeFormat(float time)
