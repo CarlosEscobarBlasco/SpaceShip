@@ -15,9 +15,11 @@ public class FinishController : MonoBehaviour
     public FinishSliderController finishSliderController;
     public UIPositionController positionController;
     private AudioController audioController;
+
     private GameObject player;
     private FileController fileController;
     private int finalReward;
+    private int finalPos;
 
     // Use this for initialization
     void Start ()
@@ -48,6 +50,7 @@ public class FinishController : MonoBehaviour
                 finalReward = gameController.GetComponent<Rewards>().getReward(player.GetComponent<ShipStatistics>().getCollisions(), player.GetComponent<ShipStatistics>().getDuration());
                 fileController.increaseMoney(finalReward);
                 audioController.playFinishSound();
+                finalPos = controller.GetComponent<Controller>().positionOf(collider.gameObject);
                 showPosition(collider.gameObject);
                 finalPanel.setPosition(controller.GetComponent<Controller>().positionOf(collider.gameObject));
                 Invoke("showFinalPanel",2);
@@ -69,6 +72,11 @@ public class FinishController : MonoBehaviour
     {
         finalPosition.text = " "+controller.GetComponent<Controller>().positionOf(ship) + "º";
         positionController.setPosition(finalPosition.text);
+    }
+
+    public int getPosition()
+    {
+        return finalPos;
     }
 
     void showFinalPanel()
