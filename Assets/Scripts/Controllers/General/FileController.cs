@@ -106,7 +106,7 @@ public class FileController : MonoBehaviour
     //TODO check if this function is needed, if not delete it. (I'm not sure if we comment in english or spanish :D )
     public string[] getShipColors(int ship)
     {
-        return ships[ship].color;//except
+        return ships[ship].color;
     }
 
     public int getShipCount()
