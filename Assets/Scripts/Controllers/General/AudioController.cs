@@ -15,6 +15,7 @@ public class AudioController : MonoBehaviour {
     public AudioClip countDownClip;
     public AudioClip startClip;
     public AudioClip finishClip;
+    public AudioClip coinClip;
 
     private bool status;
     private string filePath;
@@ -84,6 +85,18 @@ public class AudioController : MonoBehaviour {
     {
         musicAudioSource.clip = worldsMusic[world];
         musicAudioSource.Play();
+    }
+
+    public void playCoinSound()
+    {
+        effectsAudioSource.clip = coinClip;
+        effectsAudioSource.GetComponent<AudioSource>().loop = true;
+        effectsAudioSource.Play();
+    }
+    public void stopCoinSound()
+    {
+        effectsAudioSource.GetComponent<AudioSource>().loop = false;
+        effectsAudioSource.Stop();
     }
 
     public void setStatus(bool status)
