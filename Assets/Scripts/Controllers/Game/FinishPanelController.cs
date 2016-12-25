@@ -132,7 +132,7 @@ public class FinishPanelController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         float finalReward = rewardDifficulty / finishController.getPosition();
         bonus.text = bonus.text + "(-" + (rewardDifficulty - finalReward) + ")";
-        print("FR "+ rewardDifficulty);
+        print("FinalReward "+ rewardDifficulty);
         yield return new WaitForSeconds(1f);
         int rewardPos = 0;
         audioController.playCoinSound();

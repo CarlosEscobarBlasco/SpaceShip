@@ -9,10 +9,16 @@ public class PauseController : MonoBehaviour
     public GameObject spawner;
     public Controller gameController;
 
+    private AudioController audioController;
+    public GameObject audioOn;
+    public GameObject audioOff;
+
     // Use this for initialization
     void Start()
     {
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
+        audioController = GameObject.FindGameObjectWithTag("MusicSource").GetComponent<AudioController>();
+        changeImage();
     }
 
     // Update is called once per frame
@@ -43,6 +49,26 @@ public class PauseController : MonoBehaviour
     {
         pausePanel.SetActive(false);
         resumeGame();
+    }
+
+    public void musicOnOff()
+    {
+        audioController.setStatus(!audioController.getStatus());
+        changeImage();
+    }
+
+    private void changeImage()
+    {
+        if (!audioController.getStatus())
+        {
+            audioOn.SetActive(false);
+            audioOff.SetActive(true);
+        }
+        else
+        {
+            audioOn.SetActive(true);
+            audioOff.SetActive(false);
+        }
     }
 
     void resumeGame()

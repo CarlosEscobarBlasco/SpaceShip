@@ -23,7 +23,6 @@ public class Menu : MonoBehaviour
 
     public void showTutorial()
     {
-        //gameObject.SetActive(false);
         tutorial.SetActive(true);
     }
 

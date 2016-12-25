@@ -12,11 +12,13 @@ public class FinishSliderController : MonoBehaviour
 	void Awake ()
 	{
 	    finishSlider = GetComponent<Slider>();
-        player = GameObject.FindGameObjectWithTag("Player");
 	    finishSlider.minValue = 0;
 	}
 
-    void Start() { }
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 	
 	// Update is called once per frame
 	void Update ()
